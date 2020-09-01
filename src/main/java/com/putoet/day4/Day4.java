@@ -11,7 +11,7 @@ public class Day4 {
         long valid = phrases.stream().filter(PassPhrase::isValidNoDoubles).count();
         System.out.println("Number of valid pass phrases (no doubles) is " + valid);
 
-        valid = phrases.stream().filter(PassPhrase::isValidNoAnnagrams).count();
+        valid = phrases.stream().filter(PassPhrase::isValidNoAnagrams).count();
         System.out.println("Number of valid pass phrases (no anagrams) is " + valid);
     }
 }

@@ -21,7 +21,7 @@ public class PassPhrase {
         return true;
     }
 
-    public static boolean isValidNoAnnagrams(String phrase) {
+    public static boolean isValidNoAnagrams(String phrase) {
         assert phrase != null;
         final String[] words = phrase.split(" ");
 
