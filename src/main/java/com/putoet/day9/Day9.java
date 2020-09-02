@@ -4,7 +4,7 @@ import com.putoet.resources.ResourceLines;
 
 import java.util.List;
 
-public class Day10 {
+public class Day9 {
     public static void main(String[] args) {
         final List<String> list = ResourceLines.list("/day9.txt");
         final GroupData data = new GroupData(list.get(0));
