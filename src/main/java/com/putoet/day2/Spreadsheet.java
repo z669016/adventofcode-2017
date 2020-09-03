@@ -1,6 +1,5 @@
 package com.putoet.day2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,10 +8,14 @@ public class Spreadsheet {
     private final List<List<Integer>> matrix;
 
     public Spreadsheet(List<List<Integer>> matrix) {
+        assert matrix != null;
+
         this.matrix = matrix;
     }
 
     public static Spreadsheet of(List<String> lines) {
+        assert lines != null;
+
         return new Spreadsheet(lines.stream()
                 .map(line -> line.split("\t"))
                 .map(array -> Arrays.stream(array)
