@@ -6,6 +6,9 @@ to read a resource file and transform the content into a ```List<String>```, or 
 file containing comma separated values and returning a List of these values, optionally after transformation from 
 ```String``` to ```Integer```.
 
+Also uses the algorithms library, which contains generic classes for addressing classic compute problems (from the book 
+**Classic Computer Science Problems In Java** (c) Manning.com - 2020) 
+
 ## Day 1 
 The tricky part of this exercise is traversing the list of integers and selecting the right number for the comparison.
 I choose to create a base class ```IntProducer``` to traverse the list with a method ```get()``` that returns the 
@@ -106,6 +109,12 @@ the input is where the child is, so determine the distance from origin to the la
 
 For part two, just store the coordinates of the max distance while moving through the grid.   
 
+## Day 12
+Standard graph operations, so added the algorithms library which contains a basic Graph implementation. Some 
+additional work was needed, as the input contains bi-directional edges, while the Graph implementation automatically
+creates bi-directional edges. So, I needed to check for existence of the edges before adding them.
 
+After this, creating groups (```Set<Program>```) for a specific vertex (Program) or all vertices is simple, as long as 
+you remember which vertices have been visited before. 
 
 
