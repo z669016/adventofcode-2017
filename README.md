@@ -117,4 +117,14 @@ creates bi-directional edges. So, I needed to check for existence of the edges b
 After this, creating groups (```Set<Program>```) for a specific vertex (Program) or all vertices is simple, as long as 
 you remember which vertices have been visited before. 
 
+## Day 13
+I expect you should be able to calculate if you get caught in the firewall while passing. However, I choose
+to write a simulation and run it, basically brute force the solution. It works well for part 1, and of course part 
+two comes with a twist.
+
+It takes too much time to run the simulation if you also simulate the delays when they increase above 100.000. First,
+I refactored the creation of the Firewall for each try, and stopped the passing at the very first catch in any layer. 
+That didn't do the trick, and the program also needed an optimization to skip delays, after all, it's pointless to 
+delay a layer with a range of 15 more 1000 times or more.    
+
 
