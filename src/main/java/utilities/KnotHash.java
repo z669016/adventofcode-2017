@@ -98,6 +98,16 @@ public class KnotHash {
         return sb.toString();
     }
 
+    public static List<Integer> createKey(String line) {
+        assert line != null;
+
+        final List<Integer> list = new ArrayList<>();
+        line.chars().forEach(list::add);
+        list.addAll(List.of(17, 31, 73, 47, 23));
+
+        return list;
+    }
+
     public static String hash(List<Integer> input) {
         return hexadecimal(denseHash(sparseHash(input)));
     }
