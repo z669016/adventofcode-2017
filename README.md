@@ -134,4 +134,8 @@ For part 2 I transformed the bit matrix into an ```int[][]``` and replaced all 1
 I traversed the matrix again and any higher sequence number next to a lower sequence number, got replaced with the 
 lower sequence number.   
 
+## Day 15
+Hmmm ... I'm not sure where the catch in this one is ... the large numbers are no issue at all. Just an easy star 
+for once? 
+
 
