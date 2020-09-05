@@ -125,6 +125,13 @@ two comes with a twist.
 It takes too much time to run the simulation if you also simulate the delays when they increase above 100.000. First,
 I refactored the creation of the Firewall for each try, and stopped the passing at the very first catch in any layer. 
 That didn't do the trick, and the program also needed an optimization to skip delays, after all, it's pointless to 
-delay a layer with a range of 15 more 1000 times or more.    
+delay a layer with a range of 15 more 1000 times or more.  
+
+## Day 14
+Part 1 is straight forward ... generate 128 Knot hash values, decode the hex into binary and count all 1. 
+```Character.digit``` and ```Integer.toBinaryString``` are quite helpfull.
+For part 2 I transformed the bit matrix into an ```int[][]``` and replaced all 1 bits with their sequence number. Then 
+I traversed the matrix again and any higher sequence number next to a lower sequence number, got replaced with the 
+lower sequence number.   
 
 
