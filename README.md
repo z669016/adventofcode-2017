@@ -138,4 +138,10 @@ lower sequence number.
 Hmmm ... I'm not sure where the catch in this one is ... the large numbers are no issue at all. Just an easy star 
 for once? 
 
+## Day 16
+Okay, where large numbers were no issue on day 15, now they are. Until you consider that the result after each rounds 
+might at some point start to repeat... and indeed after xx dances (where one dance contains all moves as described by 
+the input) the results start to repeat. So, create a list of results (including result 0, the initial value) and the 
+result after 1 bilion repetitions will equal the result after (1.000.000.000 % repeatListSize) ...   
+
 
