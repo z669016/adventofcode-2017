@@ -144,4 +144,10 @@ might at some point start to repeat... and indeed after xx dances (where one dan
 the input) the results start to repeat. So, create a list of results (including result 0, the initial value) and the 
 result after 1 bilion repetitions will equal the result after (1.000.000.000 % repeatListSize) ...   
 
+## Day 17
+A simple update on a ```List``` works well for part 1. For part two however, you need to add too many values to use 
+a ```List```. However, the answer will be the value after the 0 (always the very first value in the list). So basically, if 
+you would only remember the value inserted when current = 0, that would be the right answer. All other inserted 
+values can be ignored.
+
 
