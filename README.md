@@ -150,4 +150,12 @@ a ```List```. However, the answer will be the value after the 0 (always the very
 you would only remember the value inserted when current = 0, that would be the right answer. All other inserted 
 values can be ignored.
 
+## Day 18
+Now this was a fun challenge ... I didn't want to introduce Threads, for that would also require correct 
+synchronization. I'll keep that for another day. As the "compiler" methods are in the same class that run the 
+instructions as Lambda's, having the Lambda's correct for part 2 is vital. A lambda compiled by CPU0, when executed
+in the context of CPU1 might still access variables of CPU0... a slightly different design with a seperate
+compiler class would have prevented that. A good test will detect these failures. Initially I was too lazy to
+write that test ... :-(  
+
 
