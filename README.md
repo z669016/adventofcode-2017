@@ -162,7 +162,17 @@ write that test ... :-(
 And ... another fun challenge. Not that complicated though, once you have created a list of "tubes" with data 
 on their start and end point, and the list of letters they might contain. For building the list, the challenge
 is in determining the right direction, which is a bit more difficult for a tube starting at a crossing (+ sign).
- 
+
+## Day 20
+This required some thinking ... and validation math for part 1. The particle that will in the end be closest th
+the origin will be the one with the smallest acceleration (Manhatten distance). If two accellerations are equal, 
+the one with the smallest delta between two steps will win, and if even those are equal, then the particle that 
+starts closest to the origin will win. Wrap this in a ```compareTo())``` method, create a list of ```Particle```
+and sort it in natural order. The first particle in the list will be the right answer for part 1.
+
+Part 2 can probably be calculated, but you can also just simulate moving forward and after eacht step removing 
+all Particles with the same position. The stream API works well for this. The questio is when to stop
+moving forward ... I decided to stop if the list didn't change for 1000 consecutive steps.    
   
 
 
