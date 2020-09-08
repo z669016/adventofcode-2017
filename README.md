@@ -156,6 +156,13 @@ synchronization. I'll keep that for another day. As the "compiler" methods are i
 instructions as Lambda's, having the Lambda's correct for part 2 is vital. A lambda compiled by CPU0, when executed
 in the context of CPU1 might still access variables of CPU0... a slightly different design with a seperate
 compiler class would have prevented that. A good test will detect these failures. Initially I was too lazy to
-write that test ... :-(  
+write that test ... :-(
+
+## Day 19
+And ... another fun challenge. Not that complicated though, once you have created a list of "tubes" with data 
+on their start and end point, and the list of letters they might contain. For building the list, the challenge
+is in determining the right direction, which is a bit more difficult for a tube starting at a crossing (+ sign).
+ 
+  
 
 
