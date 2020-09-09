@@ -174,5 +174,7 @@ Part 2 can probably be calculated, but you can also just simulate moving forward
 all Particles with the same position. The stream API works well for this. The questio is when to stop
 moving forward ... I decided to stop if the list didn't change for 1000 consecutive steps.    
   
-
+## Day 21
+A nasty one this time ... first I had a mistake in one of the rotations (indeed, didn't completely tested them),
+then I missedd some combinations of flipping and rotating. Lost quite some time finding that issue.
 
