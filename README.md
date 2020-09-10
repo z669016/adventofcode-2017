@@ -185,3 +185,7 @@ Created a Direction object with methods for turning the current direction. Creat
 determine next direction based on state of the current node, affect the current node, and keep counters. For part 2, 
 just created a SmarterVirus (which inherits from Virus) with different methods to determine the next direction, and 
 affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fast.
+
+## Day 23
+Part one is straight forward ... part 2 requires you to analyse the assembly code and determine what it does. It counts
+the numbers between values of b and c which are non prime numbers. 
