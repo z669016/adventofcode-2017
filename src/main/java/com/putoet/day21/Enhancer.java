@@ -1,5 +1,7 @@
 package com.putoet.day21;
 
+import utilities.GridUtils;
+
 import java.nio.CharBuffer;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -208,22 +210,6 @@ public class Enhancer {
         return sb.toString();
     }
 
-    public static boolean gridEquals(char[][] a, char[][] b) {
-        if (a.length != b.length)
-            return false;
-
-        for (int y = 0; y < a.length; y++) {
-            if (a[y].length != b[y].length)
-                return false;
-
-            for (int x = 0; x < a[y].length; x++)
-                if (a[y][x] != b[y][x])
-                    return false;
-        }
-
-        return true;
-    }
-
     private static int gridSize(char[][] from) {
         return from.length % 2 == 0 ? 2 : 3;
     }
@@ -272,15 +258,6 @@ public class Enhancer {
     }
 
     public static long activePixels(char[][] grid) {
-        return Arrays.stream(grid)
-                .flatMapToInt(row -> CharBuffer.wrap(row).chars())
-                .filter(c -> c == '#')
-                .count();
-    }
-
-    public static void print(char[][] grid) {
-        Arrays.stream(grid)
-                .sequential()
-                .forEach(row -> System.out.println(String.valueOf(row)));
+        return GridUtils.count(grid, '#');
     }
 }

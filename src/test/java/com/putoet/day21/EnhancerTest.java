@@ -3,6 +3,7 @@ package com.putoet.day21;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import utilities.GridUtils;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -30,11 +31,11 @@ class EnhancerTest {
 
     @Test
     void string2grid() {
-        assertTrue(Enhancer.gridEquals(GRID2, Enhancer.string2grid(LINE2)));
-        assertTrue(Enhancer.gridEquals(GRID3, Enhancer.string2grid(LINE3)));
-        assertTrue(Enhancer.gridEquals(GRID4, Enhancer.string2grid(LINE4)));
+        assertTrue(GridUtils.gridEquals(GRID2, Enhancer.string2grid(LINE2)));
+        assertTrue(GridUtils.gridEquals(GRID3, Enhancer.string2grid(LINE3)));
+        assertTrue(GridUtils.gridEquals(GRID4, Enhancer.string2grid(LINE4)));
 
-        assertTrue(Enhancer.gridEquals(new char[][]{"123".toCharArray(), "456".toCharArray(), "789".toCharArray()}, Enhancer.string2grid("123/456/789")));
+        assertTrue(GridUtils.gridEquals(new char[][]{"123".toCharArray(), "456".toCharArray(), "789".toCharArray()}, Enhancer.string2grid("123/456/789")));
     }
 
     @Test
