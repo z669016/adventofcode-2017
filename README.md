@@ -178,3 +178,10 @@ moving forward ... I decided to stop if the list didn't change for 1000 consecut
 A nasty one this time ... first I had a mistake in one of the rotations (indeed, didn't completely tested them),
 then I missedd some combinations of flipping and rotating. Lost quite some time finding that issue.
 
+## Day 22
+Pretty straight forward ... took some of the grid-methods from day 21 and moved them into a GridUtils class for reuse,
+also added a method to grow the current grid (current size * 3 and the old grid comes in the center of the new one).
+Created a Direction object with methods for turning the current direction. Created a Virus class to navigate the grid, 
+determine next direction based on state of the current node, affect the current node, and keep counters. For part 2, 
+just created a SmarterVirus (which inherits from Virus) with different methods to determine the next direction, and 
+affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fast.

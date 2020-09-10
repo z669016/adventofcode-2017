@@ -4,10 +4,8 @@ import utilities.GridUtils;
 import utilities.Point;
 
 public class Virus {
-    public static char INFECTED = '#';
-    public static char CLEAN = '.';
-    public static char WEAKENED = 'W';
-    public static char FLAGGED = 'F';
+    public static final char INFECTED = '#';
+    public static final char CLEAN = '.';
 
     private Direction direction = Direction.UP;
     private int burstCount = 0;
@@ -53,12 +51,12 @@ public class Virus {
             infect(grid);
     }
 
-    private void infect(char[][] grid) {
+    protected void infect(char[][] grid) {
         currentNode(grid, INFECTED);
         burstInfectedCount++;
     }
 
-    private void clean(char[][] grid) {
+    protected void clean(char[][] grid) {
         currentNode(grid, CLEAN);
         burstCleanedCount++;
     }
