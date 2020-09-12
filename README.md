@@ -188,4 +188,13 @@ affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fa
 
 ## Day 23
 Part one is straight forward ... part 2 requires you to analyse the assembly code and determine what it does. It counts
-the numbers between values of b and c which are non prime numbers. 
+the numbers between values of b and c which are non prime numbers.
+
+## Day 24
+Quite simple if you use a kind of depth-first-search to create bridges (chains of components) from the options you 
+have, and collect all possible bridges that cannot be extended any further from the components left. For part one,
+just find the strongest. For part two, first find the length of the longest bridge, then do the max search again 
+but filter on the right (longest) length first.
+
+ 
+ 
