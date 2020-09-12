@@ -9,6 +9,8 @@ file containing comma separated values and returning a List of these values, opt
 Also uses the algorithms library, which contains generic classes for addressing classic compute problems (from the book 
 **Classic Computer Science Problems In Java** (c) Manning.com - 2020) 
 
+It was never my intention to create the shortest program possible. I did try to create clear and simple implementations.
+
 ## Day 1 
 The tricky part of this exercise is traversing the list of integers and selecting the right number for the comparison.
 I choose to create a base class ```IntProducer``` to traverse the list with a method ```get()``` that returns the 
@@ -196,5 +198,13 @@ have, and collect all possible bridges that cannot be extended any further from 
 just find the strongest. For part two, first find the length of the longest bridge, then do the max search again 
 but filter on the right (longest) length first.
 
+## Day 25
+I decided not to write a parser to dynamically create the states, so I hardcoded my input. As the number of steps was 
+high, I also decided to use a ```List<BitSet>```s as tape, where each bitset contains 64 positions (I started with a 
+```List<Long>```, but BitSet was easier for it already provides the required operations to set the individual bits).
+Using lambda's for the State operations makes the states, and the Turing machine stunningly simple. Counting the bits 
+set for each bitset and adding them up was also simple. 
+
+  
  
  
