@@ -3,20 +3,18 @@ package com.putoet.day1;
 public class IntProducer {
     protected final String lineOfInt;
     protected int idx = 0;
+    protected final int offset;
 
-    protected IntProducer(String lineOfInt) {
+    protected IntProducer(String lineOfInt, int offset) {
         this.lineOfInt = lineOfInt;
+        this.offset = offset;
     }
 
     public static IntProducer of(String lineOfInt) {
         assert lineOfInt != null;
         assert lineOfInt.matches("[0-9]+");
 
-        return new IntProducer(lineOfInt);
-    }
-
-    public void reset() {
-        idx = 0;
+        return new IntProducer(lineOfInt, 0);
     }
 
     public boolean hasNext() {
@@ -38,6 +36,6 @@ public class IntProducer {
     }
 
     protected char offsetChar() {
-        return lineOfInt.charAt(idx % lineOfInt.length());
+        return lineOfInt.charAt((idx + offset) % lineOfInt.length());
     }
 }

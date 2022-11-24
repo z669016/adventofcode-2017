@@ -27,6 +27,6 @@ class IntProducerTest {
 
         assertFalse(producer.hasNext());
 
-        assertThrows(IllegalStateException.class, () -> producer.get());
+        assertThrows(IllegalStateException.class, producer::get);
     }
 }
