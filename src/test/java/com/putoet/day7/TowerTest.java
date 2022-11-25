@@ -1,7 +1,6 @@
 package com.putoet.day7;
 
 import com.putoet.resources.ResourceLines;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

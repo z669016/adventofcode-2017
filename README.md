@@ -74,16 +74,16 @@ is available in the map, and you can calculate the cycles it took before it reoc
 
 ## Day 7
 I used a ```Map``` to record child parent relationships, where the key is the program name, and the value is the
-name of the parent (or null if parent is unavailable). The root element for part 1 is the entry in the map with a 
+name of the parent (or null if parent is unavailable). A root element (part 1) is any entry in the map with a 
 ```null``` value.
 
 For part 2, I added a Map with the weights per program. A convenience method gets the weight for a program, or the 
 total weight of a program including the weight of its children.
 
 Find an unbalanced child by grouping the total weights of it's children into a Map (key is weight, value is number of 
-occurrences of that weight). The Map entry with value 1 is the unbalanced one. When all children of the unbalance tower
-have the same weight, then the issue is at the parent tower, otherwise navigate to the child tower with the 
-unbalanced weight. 
+occurrences of that weight). The Map entry with value 1 is obviously the unbalanced one. When all children of the 
+unbalanced tower do have the same weight, then the issue is at the parent tower, otherwise navigate to the child tower 
+with the unbalanced weight. 
 
 ## Day 8
 The trick for day 8 is to parse the instructions and feed them to a CPU class which updates (and creates) the registers

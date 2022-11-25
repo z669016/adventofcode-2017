@@ -43,7 +43,7 @@ public class Tower {
         return tower.entrySet().stream()
                 .filter(entry -> entry.getValue() == null)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<String> children(String name) {
@@ -52,7 +52,7 @@ public class Tower {
         return tower.entrySet().stream()
                 .filter(entry -> name.equals(entry.getValue()))
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<String> siblings(String name) {
@@ -65,7 +65,7 @@ public class Tower {
         return tower.entrySet().stream()
                 .filter(entry -> parent.equals(entry.getValue()) && !name.equals(entry.getKey()))
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Optional<String> unbalancedChild(String programName) {
@@ -96,11 +96,10 @@ public class Tower {
         final Map<Integer,Long> weights = childrenWeight.values().stream()
                 .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
 
-        final Optional<Integer> invalidWeight = weights.entrySet().stream()
+        return weights.entrySet().stream()
                 .filter(entry -> entry.getValue() == 1L)
                 .map(Map.Entry::getKey)
                 .findFirst();
-        return invalidWeight;
     }
 
     private static final Pattern REGEX = Pattern.compile("([a-z]+) \\(([0-9]+)\\)");
