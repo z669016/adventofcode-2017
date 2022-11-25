@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Jumper {
     private final List<Integer> jumps;
-    private boolean decrease;
+    private final boolean decrease;
 
     public Jumper(List<Integer> jumps) {
         this(jumps, false);

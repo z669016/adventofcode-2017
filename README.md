@@ -56,8 +56,9 @@ before you compare. The sorted letter version of all anagrams are identical. So 
 of a word, means you already have an anagram for that word in the set.
 
 ## Day 5
-Create an array/list for the jump values. Use an 'instruction pointer' to navigate through the list. While counting the 
-iterations, Keep iterating and change the jump-value in the list, after the new location has been determined.
+Create an array/list for the jump values (class ```Jumper```). Use an 'instruction pointer' to navigate through the 
+list. While counting the iterations, Keep iterating and change the jump-value in the list, after the new location 
+has been determined.
 
 For part 1 and 2, the only difference is in changing the value after calculating the jump offset. This can be 
 configured using a class property, or a lambda you provide to the navigating class.
