@@ -1,12 +1,11 @@
 package com.putoet.day20;
 
+import com.putoet.grid.Point3D;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
-import utilities.Point3D;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +27,7 @@ class ParticleTest {
         final List<Particle> particles = IntStream.range(0, lines.size())
                 .mapToObj(i -> Particle.of(i, lines.get(i)))
                 .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
+                .toList();
 
         assertEquals(0, particles.get(0).id());
     }

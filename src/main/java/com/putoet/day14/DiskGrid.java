@@ -1,14 +1,13 @@
 package com.putoet.day14;
 
+import com.putoet.grid.Point;
 import utilities.KnotHash;
-import utilities.Point;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DiskGrid {
-    private final List<String> hexGrid;
     private final List<String> bitGrid;
 
     public static DiskGrid of(String key) {
@@ -21,7 +20,6 @@ public class DiskGrid {
     }
 
     public DiskGrid(List<String> hexGrid) {
-        this.hexGrid = hexGrid;
         this.bitGrid = hexGrid.stream()
                 .map(DiskGrid::decode)
                 .collect(Collectors.toList());
@@ -59,7 +57,7 @@ public class DiskGrid {
         int count = 1;
         Optional<Point> point = findFirst(numbers, count);
         while(point.isPresent()) {
-            numbers[point.get().y][point.get().x] = count;
+            numbers[point.get().y()][point.get().x()] = count;
             clusterGroupFromPoint(numbers, point.get());
 
             point = findFirst(numbers, ++count);
@@ -79,7 +77,7 @@ public class DiskGrid {
         return numbers;
     }
 
-    private static Optional<Point> findFirst(int numbers[][], int count) {
+    private static Optional<Point> findFirst(int[][] numbers, int count) {
         for (int y = 0; y < numbers.length; y++)
             for (int x = 0; x < numbers[y].length; x++) {
                 if (numbers[y][x] >= count) {
@@ -92,21 +90,21 @@ public class DiskGrid {
 
     private static void clusterGroupFromPoint(int[][] numbers, Point init) {
         final Queue<Point> queue = new LinkedList<>();
-        final int count = numbers[init.y][init.x];
+        final int count = numbers[init.y()][init.x()];
         queue.offer(init);
 
         while (!queue.isEmpty()) {
             final Point point = queue.poll();
-            numbers[point.y][point.x] = count;
+            numbers[point.y()][point.x()] = count;
 
-            if (point.x < numbers[point.y].length - 1)
-                if (numbers[point.y][point.x+1] != 0 && numbers[point.y][point.x+1] != count) queue.offer(Point.of( point.x+1, point.y));
-            if (point.x > 0)
-                if (numbers[point.y][point.x-1] != 0 && numbers[point.y][point.x-1] != count) queue.offer(Point.of(point.x-1, point.y));
-            if (point.y < numbers.length - 1)
-                if (numbers[point.y+1][point.x] != 0 && numbers[point.y+1][point.x] != count) queue.offer(Point.of( point.x, point.y+1));
-            if (point.y > 0)
-                if (numbers[point.y-1][point.x] != 0 && numbers[point.y-1][point.x] != count) queue.offer(Point.of(point.x, point.y-1));
+            if (point.x() < numbers[point.y()].length - 1)
+                if (numbers[point.y()][point.x()+1] != 0 && numbers[point.y()][point.x()+1] != count) queue.offer(Point.of( point.x()+1, point.y()));
+            if (point.x() > 0)
+                if (numbers[point.y()][point.x()-1] != 0 && numbers[point.y()][point.x()-1] != count) queue.offer(Point.of(point.x()-1, point.y()));
+            if (point.y() < numbers.length - 1)
+                if (numbers[point.y()+1][point.x()] != 0 && numbers[point.y()+1][point.x()] != count) queue.offer(Point.of( point.x(), point.y()+1));
+            if (point.y() > 0)
+                if (numbers[point.y()-1][point.x()] != 0 && numbers[point.y()-1][point.x()] != count) queue.offer(Point.of(point.x(), point.y()-1));
         }
     }
 

@@ -1,42 +1,19 @@
 package com.putoet.day20;
 
-import utilities.Point3D;
+import com.putoet.grid.Point3D;
 
-import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class Particle implements Comparable<Particle> {
-    private final int id;
-    private final Point3D position;
-    private final Point3D velocity;
-    private final Point3D acceleration;
-
-    private Particle(int id, Point3D position, Point3D velocity, Point3D acceleration) {
-        this.id = id;
-        this.position = position;
-        this.velocity = velocity;
-        this.acceleration = acceleration;
-    }
-
-    public int id(){ return id; }
-    public Point3D position() {
-        return position;
-    }
-    public Point3D acceleration() {
-        return acceleration;
-    }
-    public Point3D velocity() {
-        return velocity;
-    }
-
+public record Particle(int id, Point3D position, Point3D velocity, Point3D acceleration) implements Comparable<Particle> {
     public Particle step() {
         return step(1);
     }
 
     public Particle step(int count) {
         final Point3D acceleration = this.acceleration;
-        final Point3D velocity = this.velocity.add(acceleration.mul(count));
-        final Point3D position = this.position.add(this.velocity.mul(count)).add(acceleration.mul(IntStream.range(1,count+1).sum()));
+        final Point3D velocity = this.velocity.add(acceleration.transform(p -> p * count));
+        final Point3D position = this.position.add(this.velocity.transform(p -> p * count))
+                .add(acceleration.transform(p -> p * IntStream.range(1,count+1).sum()));
 
         return new Particle(id, position, velocity, acceleration);
     }
@@ -44,22 +21,6 @@ public class Particle implements Comparable<Particle> {
     @Override
     public String toString() {
         return String.format("{id=%d p=%s, v=%s, a=%s}", id, position, velocity, acceleration);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Particle)) return false;
-        Particle particle = (Particle) o;
-        return id == particle.id &&
-                position.equals(particle.position) &&
-                velocity.equals(particle.velocity) &&
-                acceleration.equals(particle.acceleration);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, position, velocity, acceleration);
     }
 
     public static Particle of(int id, String line) {
@@ -84,7 +45,7 @@ public class Particle implements Comparable<Particle> {
     @Override
     public int compareTo(Particle other) {
 
-        int compareTo = acceleration.compareTo(other.acceleration);
+        int compareTo = Integer.compare(acceleration.manhattanDistance(), other.acceleration.manhattanDistance());
         if (compareTo == 0) {
             final int thisDelta =
                     velocity.add(acceleration).add(acceleration).manhattanDistance() -

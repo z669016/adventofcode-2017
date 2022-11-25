@@ -1,6 +1,6 @@
 package com.putoet.day19;
 
-import utilities.Point;
+import com.putoet.grid.Point;
 
 import java.util.*;
 import java.util.stream.Collector;
@@ -26,11 +26,9 @@ public class SeriesOfTubes {
         this.tubes = tubes;
     }
 
-    public List<Tube> tubes() { return tubes; }
-
     public String letters() {
         return tubes.stream()
-                .flatMap(tube -> tube.letters.stream())
+                .flatMap(tube -> tube.letters().stream())
                 .collect(Collector.of(StringBuilder::new, StringBuilder::append, StringBuilder::append, StringBuilder::toString));
     }
 
@@ -73,7 +71,7 @@ public class SeriesOfTubes {
         final Point start = start(grid);
         Tube tube = createTube(grid, start);
 
-        while (!Character.isLetter(grid[tube.end.y][tube.end.x])) {
+        while (!Character.isLetter(grid[tube.end().y()][tube.end().x()])) {
             list.add(tube);
             tube = createTube(grid, tube);
         }
@@ -86,12 +84,12 @@ public class SeriesOfTubes {
     }
 
     private static Tube createTube(char[][] grid, Tube tube) {
-        return createTube(grid, tube.end, direction(grid, tube));
+        return createTube(grid, tube.end(), direction(grid, tube));
     }
 
     private static Tube createTube(char[][] grid, Point start, Direction direction) {
-        int y = start.y;
-        int x = start.x;
+        int y = start.y();
+        int x = start.x();
 
         List<Character> letters = new ArrayList<>();
         switch (direction) {
@@ -105,7 +103,7 @@ public class SeriesOfTubes {
                         y--;
                         break;
                     }
-                } while (grid[y][x] != CORNER && y < grid.length);
+                } while (grid[y][x] != CORNER);
 
             }
             case UP -> {
@@ -149,11 +147,11 @@ public class SeriesOfTubes {
         if (grid[y][x] == CORNER || Character.isLetter(grid[y][x]))
             return new Tube(start, Point.of(x, y), letters);
 
-        throw new IllegalStateException("No end point found for line starting at " + start + " and movind " + direction);
+        throw new IllegalStateException("No end point found for line starting at " + start + " and moving " + direction);
     }
 
     private static Direction direction(char[][] grid, Point point) {
-        final int y = point.y, x = point.x;
+        final int y = point.y(), x = point.x();
 
         if (y < grid.length - 1 && verticalSymbol(grid[y+1][x])) return Direction.DOWN;
         if (y > 0 && verticalSymbol(grid[y-1][x])) return Direction.UP;
@@ -172,9 +170,9 @@ public class SeriesOfTubes {
     }
 
     private static Direction direction(char[][] grid, Tube tube) {
-        final int y = tube.end.y, x = tube.end.x;
+        final int y = tube.end().y(), x = tube.end().x();
 
-        if (tube.start.y != tube.end.y) {
+        if (tube.start().y() != tube.end().y()) {
             if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x+1])) return Direction.RIGHT;
             if (x > 0 && horizontalSymbol(grid[y][x-1])) return Direction.LEFT;
         } else {

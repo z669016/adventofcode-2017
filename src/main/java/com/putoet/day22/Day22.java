@@ -1,8 +1,8 @@
 package com.putoet.day22;
 
+import com.putoet.grid.Point;
 import com.putoet.resources.ResourceLines;
-import utilities.GridUtils;
-import utilities.Point;
+import com.putoet.grid.GridUtils;
 
 public class Day22 {
     public static void main(String[] args) {

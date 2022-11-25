@@ -18,8 +18,7 @@ public class KnotHash {
 
     public KnotHash(int[] list) {
         this.list = new int[list.length];
-        for (int idx = 0; idx < list.length; idx++)
-            this.list[idx] = list[idx];
+        System.arraycopy(list, 0, this.list, 0, list.length);
     }
 
     public void reverse(int size) {

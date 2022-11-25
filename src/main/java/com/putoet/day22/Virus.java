@@ -1,7 +1,7 @@
 package com.putoet.day22;
 
-import utilities.GridUtils;
-import utilities.Point;
+import com.putoet.grid.Point;
+import com.putoet.grid.GridUtils;
 
 public class Virus {
     public static final char INFECTED = '#';
@@ -33,7 +33,7 @@ public class Virus {
     public int burstCleanedCount() { return burstCleanedCount; }
 
     public char[][] burst(char[][] grid) {
-        grid = checkPositiom(grid);
+        grid = checkPosition(grid);
 
         direction = direction(currentNode(grid));
         affectCurrentPosition(grid);
@@ -65,9 +65,9 @@ public class Virus {
         return state == INFECTED ? direction.turnRight() : direction.turnLeft();
     }
 
-    private char[][] checkPositiom(char[][] grid) {
-        if ((position.x < 0 || position.x >= grid.length) || (position.y < 0 || position.y >= grid.length)) {
-            position = Point.of(position.x + grid.length, position.y + grid.length);
+    private char[][] checkPosition(char[][] grid) {
+        if ((position.x() < 0 || position.x() >= grid.length) || (position.y() < 0 || position.y() >= grid.length)) {
+            position = Point.of(position.x() + grid.length, position.y() + grid.length);
             grid = GridUtils.grow(grid, CLEAN);
         }
 
@@ -76,18 +76,18 @@ public class Virus {
 
     private void moveForward() {
         position = switch (direction) {
-            case UP -> Point.of(position.x, position.y - 1);
-            case RIGHT -> Point.of(position.x + 1, position.y);
-            case DOWN -> Point.of(position.x, position.y + 1);
-            case LEFT -> Point.of(position.x - 1, position.y);
+            case UP -> Point.of(position.x(), position.y() - 1);
+            case RIGHT -> Point.of(position.x ()+ 1, position.y());
+            case DOWN -> Point.of(position.x(), position.y() + 1);
+            case LEFT -> Point.of(position.x() - 1, position.y());
         };
     }
 
     public char currentNode(char[][] grid) {
-        return grid[position.y][position.x];
+        return grid[position.y()][position.x()];
     }
 
     public void currentNode(char[][] grid, char state) {
-        grid[position.y][position.x] = state;
+        grid[position.y()][position.x()] = state;
     }
 }

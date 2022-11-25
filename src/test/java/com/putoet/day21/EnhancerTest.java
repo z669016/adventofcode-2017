@@ -2,12 +2,9 @@ package com.putoet.day21;
 
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import utilities.GridUtils;
+import com.putoet.grid.GridUtils;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 

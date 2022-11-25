@@ -1,13 +1,10 @@
 package com.putoet.day22;
 
-import utilities.Point;
+import com.putoet.grid.Point;
 
 public class SmarterVirus extends Virus {
     public static final char WEAKENED = 'W';
     public static final char FLAGGED = 'F';
-
-    private int burstFlaggedCount = 0;
-    private int burstWeakenedCount = 0;
 
     public SmarterVirus(Point start) {
         super(start);
@@ -24,12 +21,10 @@ public class SmarterVirus extends Virus {
 
     protected void weaken(char[][] grid) {
         currentNode(grid, WEAKENED);
-        burstWeakenedCount++;
     }
 
     protected void flag(char[][] grid) {
         currentNode(grid, FLAGGED);
-        burstFlaggedCount++;
     }
 
     protected Direction direction(char state) {

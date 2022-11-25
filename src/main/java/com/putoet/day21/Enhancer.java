@@ -1,8 +1,7 @@
 package com.putoet.day21;
 
-import utilities.GridUtils;
+import com.putoet.grid.GridUtils;
 
-import java.nio.CharBuffer;
 import java.util.*;
 import java.util.stream.Collectors;
 
