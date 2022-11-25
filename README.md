@@ -47,12 +47,13 @@ already, so these can be used to calculate the next value (which in turn, is add
 until you calculated a value larger that the input value. 
 
 ## Day 4
-Finding double words is easy ... just add all words to a ```Set<String>``` and as soon as adding a word fails, you 
-bumped into an invalid double word. That's all for part 1.
+Finding double words is easy ... just add all words to a ```Set<String>``` and as soon as adding a word fails 
+(Set.add returns false is the element already exists in the set), you bumped into an invalid double word. That's all 
+for part 1.
 
-Doing so for anagrams is easy as well, as an anagram contains the same letters ... so just sort the letters in the 
-word before you add the word to the set. As soon as you add an anagram, the sorted version of all anagrams are 
-identical. So failing to add a sorted version of a word, means you aleady have an anagram in the set.
+Doing so for anagrams is easy as well, as an anagram contains the same letters ... so just sort the letters in the word 
+before you compare. The sorted letter version of all anagrams are identical. So failing to add a sorted letter version 
+of a word, means you already have an anagram for that word in the set.
 
 ## Day 5
 Create an array/list for the jump values. Use an 'instruction pointer' to navigate through the list. While counting the 
