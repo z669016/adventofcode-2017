@@ -1,6 +1,7 @@
 package com.putoet.day2;
 
 import com.putoet.resources.ResourceLines;
+import org.javatuples.Pair;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public class Day2 {
 
         System.out.println("Checksum is " + spreadsheet.checksum());
 
-        final List<List<Integer>> evenlyDivisableValues = spreadsheet.evenlyDivisableValues();
-        final long sum = evenlyDivisableValues.stream()
-                .mapToInt(list -> list.get(0) / list.get(1))
+        final List<Pair<Integer,Integer>> evenlyDividableValues = spreadsheet.evenlyDividableValues();
+        final long sum = evenlyDividableValues.stream()
+                .mapToInt(list -> list.getValue0() / list.getValue1())
                 .sum();
 
         System.out.println("Sum of results is " + sum);

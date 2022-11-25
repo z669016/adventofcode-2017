@@ -6,7 +6,7 @@ to read a resource file and transform the content into a ```List<String>```, or 
 file containing comma separated values and returning a List of these values, optionally after transformation from 
 ```String``` to ```Integer```.
 
-Also uses the algorithms library, which contains generic classes for addressing classic compute problems (from the book 
+Also uses the algorithms' library, which contains generic classes for addressing classic compute problems (from the book 
 **Classic Computer Science Problems In Java** (c) Manning.com - 2020) 
 
 It was never my intention to create the shortest program possible. I did try to create clear and simple implementations.
@@ -21,11 +21,12 @@ being used.
 
 ## Day 2
 Maybe not the most efficient, but I decided to represent the matrix as a ```List``` of ```List's```, which is easy to 
-transform using the stream API. A class to host the convenience methods for transforming the content wrapped the matrix.
+transform using the stream API. The class ```Spreadsheet``` to host the methods for performing the calculations.
 
-For part one, just create a List with the min values per row, and a List with the max values per row. I calculated the 
-checksum by combining the two lists. For part two, I added a method to create a List of List's wich contained the 
-easy dividable values per row.
+For part 1, just create a List with the min values per row, and a List with the max values per row. I calculated the 
+checksum by zipping the two lists (using Guava ```Streams.zip```) and summing the absolute values of the difference
+within each pair of values. For part 2, I added a method to create a List of ```Pair<Integer,Integer>```s which 
+contained the easy dividable values per row, and then sum the division of each pair.
 
 ## Day 3
 Looking at the spiral, you can also see squares, where the outer square starts at the right of the last number of the 

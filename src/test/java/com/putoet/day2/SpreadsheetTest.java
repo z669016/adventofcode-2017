@@ -1,13 +1,12 @@
 package com.putoet.day2;
 
-import jdk.jshell.spi.SPIResolutionException;
+import org.javatuples.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SpreadsheetTest {
     private static final List<String> MATRIX = List.of(
@@ -24,8 +23,8 @@ class SpreadsheetTest {
     }
 
     @Test
-    void is() {
-        assertTrue(spreadsheet.is(List.of(List.of(5, 1, 9, 5), List.of(7, 5, 3), List.of(2, 4, 6, 8))));
+    void equals() {
+        assertEquals(spreadsheet, new Spreadsheet(List.of(List.of(5, 1, 9, 5), List.of(7, 5, 3), List.of(2, 4, 6, 8))));
     }
 
     @Test
@@ -44,16 +43,16 @@ class SpreadsheetTest {
     }
 
     @Test
-    void evenlyDivisableValues() {
+    void evenlyDividableValues() {
         final List<String> matrix = List.of(
                 "5\t9\t2\t8",
                 "9\t4\t7\t3",
                 "3\t8\t6\t5"
         );
         final Spreadsheet spreadsheet = Spreadsheet.of(matrix);
-        final List<List<Integer>> evenlyDivisableValues = spreadsheet.evenlyDivisableValues();
+        final List<Pair<Integer,Integer>> evenlyDividableValues = spreadsheet.evenlyDividableValues();
 
-        assertEquals(List.of(List.of(8, 2), List.of(9, 3), List.of(6, 3)), evenlyDivisableValues);
+        assertEquals(List.of(Pair.with(8, 2), Pair.with(9, 3), Pair.with(6, 3)), evenlyDividableValues);
     }
 
 }

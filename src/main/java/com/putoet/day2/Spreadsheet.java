@@ -1,16 +1,14 @@
 package com.putoet.day2;
 
+import com.google.common.collect.Streams;
+import org.javatuples.Pair;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Spreadsheet {
-    private final List<List<Integer>> matrix;
-
-    public Spreadsheet(List<List<Integer>> matrix) {
+public record Spreadsheet(List<List<Integer>> matrix) {
+    public Spreadsheet {
         assert matrix != null;
-
-        this.matrix = matrix;
     }
 
     public static Spreadsheet of(List<String> lines) {
@@ -20,28 +18,9 @@ public class Spreadsheet {
                 .map(line -> line.split("\t"))
                 .map(array -> Arrays.stream(array)
                         .map(Integer::parseInt)
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList())
+                        .toList())
+                .toList()
         );
-    }
-
-    public boolean is(List<List<Integer>> matrix) {
-        if (this.matrix.size() != matrix.size())
-            return false;
-
-        for (int idy = 0; idy < this.matrix.size(); idy++) {
-            final List<Integer> thisRow = this.matrix.get(idy);
-            final List<Integer> row = matrix.get(idy);
-
-            if (thisRow.size() != row.size())
-                return false;
-
-            for (int idx = 0; idx < thisRow.size(); idx++)
-                if (thisRow.get(idx) != row.get(idx))
-                    return false;
-        }
-
-        return true;
     }
 
     public List<Integer> min() {
@@ -49,8 +28,8 @@ public class Spreadsheet {
             return List.of();
 
         return matrix.stream()
-                .map(row -> row.stream().mapToInt(Integer::intValue).min().getAsInt())
-                .collect(Collectors.toList());
+                .map(row -> row.stream().mapToInt(Integer::intValue).min().orElseThrow())
+                .toList();
     }
 
     public List<Integer> max() {
@@ -58,31 +37,30 @@ public class Spreadsheet {
             return List.of();
 
         return matrix.stream()
-                .map(row -> row.stream().mapToInt(Integer::intValue).max().getAsInt())
-                .collect(Collectors.toList());
+                .map(row -> row.stream().mapToInt(Integer::intValue).max().orElseThrow())
+                .toList();
     }
 
     public long checksum() {
         final List<Integer> min = min();
         final List<Integer> max = max();
 
-        long checksum = 0;
-        for (int idx = 0; idx < min.size(); idx++)
-            checksum += (Math.abs(min.get(idx) - max.get(idx)));
-
-        return checksum;
+        //noinspection UnstableApiUsage
+        return Streams.zip(min.stream(), max.stream(), Pair::with)
+                .mapToInt(p -> Math.abs(p.getValue0() - p.getValue1()))
+                .sum();
     }
 
-    public List<List<Integer>> evenlyDivisableValues() {
+    public List<Pair<Integer,Integer>> evenlyDividableValues() {
         if (matrix.size() == 0)
             return List.of();
 
         return matrix.stream()
-                .map(Spreadsheet::evenlyDivisableValues)
-                .collect(Collectors.toList());
+                .map(Spreadsheet::evenlyDividableValues)
+                .toList();
     }
 
-    private static List<Integer> evenlyDivisableValues(List<Integer> row) {
+    private static Pair<Integer,Integer> evenlyDividableValues(List<Integer> row) {
         for (int idx = 0; idx < row.size() - 1; idx++) {
             final int x = row.get(idx);
 
@@ -90,9 +68,9 @@ public class Spreadsheet {
                 final int z = row.get(idz);
 
                 if (x % z == 0)
-                    return List.of(x, z);
+                    return Pair.with(x, z);
                 if (z % x == 0)
-                    return List.of(z, x);
+                    return Pair.with(z, x);
             }
         }
 
