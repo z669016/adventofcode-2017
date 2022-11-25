@@ -65,8 +65,12 @@ configured using a class property, or a lambda you provide to the navigating cla
 
 ## Day 6 
 Again you can use a Set to determine when a value reoccurs. In that Set, store the ```List<Integer>``` that represent
-the rebalanced memory bank configurations. Just rebalance, add to the Set, and count the number of rebalancing 
+the rebalanced memory bank configurations. Just re-balance, add to the Set, and count the number of re-balancing 
 performed. Pretty straight forward.
+
+For part 2, use a ```Map<List<Integer>,Integer>``` to store the re-ordered configurations and the loop-count of their 
+first 'appearance' (using the configuration as the key). As soon as any configuration reoccurs, it's original count 
+is available in the map, and you can calculate the cycles it took before it reoccurred.  
 
 ## Day 7
 I used a ```Map``` to record child parent relationships, where the key is the program name, and the value is the
