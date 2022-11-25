@@ -14,7 +14,7 @@ public class Day8 {
         if (max.isPresent())
             System.out.println("Maximum register value is " + max.getAsInt());
 
-        final OptionalInt ever = cpu.highestRegisterValueEVer();
+        final OptionalInt ever = cpu.highestRegisterValueEver();
         if (ever.isPresent())
             System.out.println("Maximum register value ever is " + ever.getAsInt());
     }

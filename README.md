@@ -86,8 +86,9 @@ unbalanced tower do have the same weight, then the issue is at the parent tower,
 with the unbalanced weight. 
 
 ## Day 8
-The trick for day 8 is to parse the instructions and feed them to a CPU class which updates (and creates) the registers
-in case the predicate is true. For part 2, the CPU simply needs to track the highest possible register value.
+The trick for day 8 is to parse the instructions and feed them to a ```CPU``` class which updates (and creates) the 
+registers in case the predicate is true. For part 2, the CPU simply needs to track the highest possible register value
+in the ```setRegister()``` method.
 
 ## Day 9
 Create a state machine that parses the input data. '<' moves into COMMENT state (all characters parsed in this state) 

@@ -7,15 +7,11 @@ public class CPU {
     private final Map<String,Integer> regs = new HashMap<>();
     private int highestEver = Integer.MIN_VALUE;
 
-    public Map<String,Integer> regs() {
-        return Collections.unmodifiableMap(regs);
-    }
-
     public OptionalInt highestRegisterValue() {
         return regs.values().stream().mapToInt(i -> i).max();
     }
 
-    public OptionalInt highestRegisterValueEVer() {
+    public OptionalInt highestRegisterValueEver() {
         return regs.size() == 0 ? OptionalInt.empty() : OptionalInt.of(highestEver);
     }
 
