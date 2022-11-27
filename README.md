@@ -97,7 +97,9 @@ are added to the comment string. '>' exits the comment state, and adds the comme
 state again. '{' starts a GROUP state (when not in a comment), and increases the group-level. '}' exits the group state, 
 updates the score and decreases group level again.
 
-The stats gathered during parsing can be used to answer part 2 as well.
+The ```DataTokenizer``` class wraps the input and supports the ```Iterator<DataToken>``` interface iterate the input 
+string.```DataStats.parse()``` parses an input string, calculates the score, the garbage length and counts all excluded
+characters and returns a DataStats instance. The stats gathered during parsing can be used to answer both part 1 and 2.
 
 ## Day 10
 A KnotHash class wraps the array of values. It can reverse using a size parameter, and then reverses 'size' elements 
