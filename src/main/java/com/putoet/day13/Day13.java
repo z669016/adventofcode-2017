@@ -15,11 +15,6 @@ public class Day13 {
         long delay = 0;
         do {
             delay++;
-
-            if (delay == 0) {
-                throw new IllegalArgumentException("counter overflow error !!!");
-            }
-
             firewall.reset();
             firewall.pass(delay);
         } while (firewall.caught());

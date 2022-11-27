@@ -49,7 +49,7 @@ class FirewallTest {
         layer.next();
         assertEquals(0, layer.scanner());
         assertFalse(layer.caught());
-        layer.leave();;
+        layer.leave();
         layer.next();
         assertEquals(1, layer.scanner());
         layer.next();

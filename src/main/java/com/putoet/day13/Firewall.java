@@ -28,7 +28,7 @@ public class Firewall {
 
         @Override
         public void init(long delay) {
-            delay = delay % (range * 2 - 2);
+            delay = delay % (range * 2L - 2);
             while (delay > 0) {
                 delay--;
                 next();
@@ -80,7 +80,7 @@ public class Firewall {
 
         @Override
         public String toString() {
-            final StringBuffer sb = new StringBuffer();
+            final StringBuilder sb = new StringBuilder();
             for (int i = 0; i < range; i++) {
                 if (i == scanner)
                     sb.append(i == 0 && entered ? "[@] " : "[.] ");
@@ -101,7 +101,7 @@ public class Firewall {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         for (int idx = 0; idx < layers.size(); idx++)
             sb.append(idx).append(": ").append(layers.get(idx)).append("\n");
 
