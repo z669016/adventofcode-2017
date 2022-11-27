@@ -4,6 +4,29 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class CPU {
+    private enum Operator {
+        EQUALS("=="),
+        NOT_EQUALS("!="),
+        LESS_THAN("<"),
+        LESS_EQUAL("<="),
+        GREATER_THAN(">"),
+        GREATER_EQUAL(">=");
+
+        private final String symbol;
+
+        Operator(String symbol) {
+            this.symbol = symbol;
+        }
+
+        static Operator of(String symbol) {
+            for (Operator operator : Operator.values()) {
+                if (operator.symbol.equals(symbol))
+                    return operator;
+            }
+            throw new IllegalArgumentException("Invalid symbol '" + symbol + "'");
+        }
+    }
+
     private final Map<String,Integer> regs = new HashMap<>();
     private int highestEver = Integer.MIN_VALUE;
 
@@ -41,21 +64,24 @@ public class CPU {
         regs.put(name, value);
     }
 
-    public static Predicate<CPU> predicate(String predicate) {
+    public static Predicate<CPU> compile(String predicate) {
         assert predicate != null;
 
         final String[] parts = predicate.split(" ");
         if (parts.length != 3)
             throw new IllegalArgumentException("Invalid predicate '" + predicate + "'");
 
-        return switch (parts[1]) {
-            case "==" -> (CPU cpu) -> cpu.getRegister(parts[0]) == Integer.parseInt(parts[2]);
-            case "!=" -> (CPU cpu) -> cpu.getRegister(parts[0]) != Integer.parseInt(parts[2]);
-            case ">" -> (CPU cpu) -> cpu.getRegister(parts[0]) > Integer.parseInt(parts[2]);
-            case ">=" -> (CPU cpu) -> cpu.getRegister(parts[0]) >= Integer.parseInt(parts[2]);
-            case "<" -> (CPU cpu) -> cpu.getRegister(parts[0]) < Integer.parseInt(parts[2]);
-            case "<=" -> (CPU cpu) -> cpu.getRegister(parts[0]) <= Integer.parseInt(parts[2]);
-            default -> throw new IllegalArgumentException("Invalid predicate '" + predicate + "'");
+        return compile(parts[0], Operator.of(parts[1]), Integer.parseInt(parts[2]));
+    }
+
+    private static Predicate<CPU> compile(String reg, Operator operator, int value) {
+        return switch (operator) {
+            case EQUALS -> (CPU cpu) -> cpu.getRegister(reg) == value;
+            case NOT_EQUALS -> (CPU cpu) -> cpu.getRegister(reg) != value;
+            case GREATER_THAN -> (CPU cpu) -> cpu.getRegister(reg) > value;
+            case GREATER_EQUAL -> (CPU cpu) -> cpu.getRegister(reg) >= value;
+            case LESS_THAN -> (CPU cpu) -> cpu.getRegister(reg) < value;
+            case LESS_EQUAL -> (CPU cpu) -> cpu.getRegister(reg) <= value;
         };
     }
 
@@ -67,7 +93,7 @@ public class CPU {
             if (parts.length != 2)
                 throw new IllegalArgumentException("Invalid instruction '" + instruction + "'");
 
-            final Predicate<CPU> predicate = predicate(parts[1]);
+            final Predicate<CPU> predicate = compile(parts[1]);
 
             final String[] actions = parts[0].split(" ");
             final String register = actions[0].trim();
