@@ -29,28 +29,28 @@ class HexGridTest {
     @Test
     void move() {
         final HexGrid north = HexGrid.origin().move(Direction.NORTH);
-        assertEquals(north.x, HexGrid.origin().x);
-        assertEquals(north.y, HexGrid.origin().y + 2);
+        assertEquals(north.x(), HexGrid.origin().x());
+        assertEquals(north.y(), HexGrid.origin().y() + 2);
 
         final HexGrid northEast = HexGrid.origin().move(Direction.NORTH_EAST);
-        assertEquals(northEast.x, HexGrid.origin().x + 1);
-        assertEquals(northEast.y, HexGrid.origin().y + 1);
+        assertEquals(northEast.x(), HexGrid.origin().x() + 1);
+        assertEquals(northEast.y(), HexGrid.origin().y() + 1);
 
         final HexGrid southEast = HexGrid.origin().move(Direction.SOUTH_EAST);
-        assertEquals(southEast.x, HexGrid.origin().x + 1);
-        assertEquals(southEast.y, HexGrid.origin().y - 1);
+        assertEquals(southEast.x(), HexGrid.origin().x() + 1);
+        assertEquals(southEast.y(), HexGrid.origin().y() - 1);
 
         final HexGrid south = HexGrid.origin().move(Direction.SOUTH);
-        assertEquals(south.x, HexGrid.origin().x);
-        assertEquals(south.y, HexGrid.origin().y - 2);
+        assertEquals(south.x(), HexGrid.origin().x());
+        assertEquals(south.y(), HexGrid.origin().y() - 2);
 
         final HexGrid southWest = HexGrid.origin().move(Direction.SOUTH_WEST);
-        assertEquals(southWest.x, HexGrid.origin().x - 1);
-        assertEquals(southWest.y, HexGrid.origin().y - 1);
+        assertEquals(southWest.x(), HexGrid.origin().x() - 1);
+        assertEquals(southWest.y(), HexGrid.origin().y() - 1);
 
         final HexGrid northWest = HexGrid.origin().move(Direction.NORTH_WEST);
-        assertEquals(northWest.x, HexGrid.origin().x - 1);
-        assertEquals(northWest.y, HexGrid.origin().y + 1);
+        assertEquals(northWest.x(), HexGrid.origin().x() - 1);
+        assertEquals(northWest.y(), HexGrid.origin().y() + 1);
     }
 
     @Test

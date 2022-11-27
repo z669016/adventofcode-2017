@@ -2,7 +2,7 @@ package com.putoet.day11;
 
 import java.util.*;
 
-public class HexGrid {
+public record HexGrid(int x, int y) {
     private static HexGrid origin = new HexGrid(0, 0);
     private static HexGrid max = origin;
 
@@ -25,13 +25,6 @@ public class HexGrid {
         origin = max = new HexGrid(0, 0);
     }
 
-    public final int x, y;
-
-    public HexGrid(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public HexGrid move(List<Direction> directions) {
         HexGrid grid = this;
         for (Direction direction : directions)
@@ -41,32 +34,20 @@ public class HexGrid {
     }
 
     public HexGrid move(Direction direction) {
-        switch (direction) {
-            case NORTH:
-                return extend(x, y + 2);
-
-            case NORTH_EAST:
-                return extend(x + 1, y + 1);
-
-            case SOUTH_EAST:
-                return extend(x + 1, y - 1);
-
-            case SOUTH:
-                return extend(x, y - 2);
-
-            case SOUTH_WEST:
-                return extend(x - 1, y - 1);
-
-            case NORTH_WEST:
-            default:
-                return extend(x - 1, y + 1);
-        }
+        return switch (direction) {
+            case NORTH -> extend(x, y + 2);
+            case NORTH_EAST -> extend(x + 1, y + 1);
+            case SOUTH_EAST -> extend(x + 1, y - 1);
+            case SOUTH -> extend(x, y - 2);
+            case SOUTH_WEST -> extend(x - 1, y - 1);
+            case NORTH_WEST -> extend(x - 1, y + 1);
+        };
     }
 
     public int distance(HexGrid other) {
         final int distanceX = Math.abs(other.x - x);
         final int distanceY = Math.abs(other.y - y);
 
-        return  distanceX + Math.max(Math.abs(distanceY) - Math.abs(distanceX), 0)/2;
+        return distanceX + Math.max(Math.abs(distanceY) - Math.abs(distanceX), 0) / 2;
     }
 }

@@ -109,7 +109,7 @@ from the current element. A convenience method takes care of this reverse operat
 hexadecimal string for part 2.
 
 ## Day 11
-You can consider a hex grid as a special type of square grid. The starting cell has coordinates (0,0). a cell at the 
+You can consider a ```HexGrid``` as a special type of square grid. The starting cell has coordinates (0,0). a cell at the 
 north has coordinates (x, y+2), while a cell at the south has coordinates (x, y-2). A cell at north-east has 
 coordinates (x+1,y+1), at south-east (x+1,y-1), at north-west (x-1, y+1), and at south-west (x-1, y-1).
 
