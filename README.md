@@ -123,11 +123,16 @@ For part two, just store the coordinates of the max distance while moving throug
 
 ## Day 12
 Standard graph operations, so added the algorithms library which contains a basic Graph implementation. Some 
-additional work was needed, as the input contains bidirectional edges, while the Graph implementation automatically
-creates bidirectional edges. So, I needed to check for existence of the edges before adding them.
+additional work was needed for the ```ProgramGraph<Program>```, as the input contains bidirectional edges, while the 
+Graph implementation (```UnweightedGraph<T>```) automatically creates bidirectional edges. So, I needed to check for 
+existence of the edges before adding them.
 
-After this, creating groups (```Set<Program>```) for a specific vertex (Program) or all vertices is simple, as long as 
-you remember which vertices have been visited before. 
+After this, creating a group (```Set<Program>```) for a specific vertex (```Program("0")```) of all vertices is simple, 
+use a queue to browse vertices and their neighbours one by one, just remember which vertices have been visited before 
+to prevent you run around in circles. This will solve part 1.
+
+For part 2, just browse all vertices in the graph, and get their group (reuse method of part 1) and store them in a 
+```Set<Set<Program>>```. Again, remember which vertices have been visited before to prevent you run around in circles.
 
 ## Day 13
 I expect you should be able to calculate if you get caught in the firewall while passing. However, I choose

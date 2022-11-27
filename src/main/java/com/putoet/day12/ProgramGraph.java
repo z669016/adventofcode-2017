@@ -1,10 +1,8 @@
 package com.putoet.day12;
 
-import com.putoet.graph.Edge;
 import com.putoet.graph.UnweightedGraph;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ProgramGraph extends UnweightedGraph<Program> {
     public static ProgramGraph of(List<String> lines) {
@@ -30,7 +28,7 @@ public class ProgramGraph extends UnweightedGraph<Program> {
     private static Program program(String line) {
         assert line != null;
 
-        return Program.of(defSplit(line)[0]);
+        return new Program(defSplit(line)[0]);
     }
 
     private static String[] defSplit(String line) {
@@ -42,8 +40,8 @@ public class ProgramGraph extends UnweightedGraph<Program> {
 
     private static List<Program> connects(String line) {
         return Arrays.stream(defSplit(line)[1].split(", "))
-                .map(Program::of)
-                .collect(Collectors.toList());
+                .map(Program::new)
+                .toList();
     }
 
     public ProgramGraph() {
