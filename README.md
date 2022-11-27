@@ -80,7 +80,7 @@ name of the parent (or null if parent is unavailable). A root element (part 1) i
 For part 2, I added a Map with the weights per program. A convenience method gets the weight for a program, or the 
 total weight of a program including the weight of its children.
 
-Find an unbalanced child by grouping the total weights of it's children into a Map (key is weight, value is number of 
+Find an unbalanced child by grouping the total weights of its children into a Map (key is weight, value is number of 
 occurrences of that weight). The Map entry with value 1 is obviously the unbalanced one. When all children of the 
 unbalanced tower do have the same weight, then the issue is at the parent tower, otherwise navigate to the child tower 
 with the unbalanced weight. 
@@ -103,9 +103,9 @@ characters and returns a DataStats instance. The stats gathered during parsing c
 
 ## Day 10
 A KnotHash class wraps the array of values. It can reverse using a size parameter, and then reverses 'size' elements 
-from the current element. A convenience methods takes care of this reverse operation on the list. 
+from the current element. A convenience method takes care of this reverse operation on the list. 
 
-```sparseHash```, ```denseHash``` and ```hexadecimal``` methods the operate on the KnotHash list to calulate the 
+```sparseHash```, ```denseHash``` and ```hexadecimal``` methods operate on the KnotHash list to calculate the 
 hexadecimal string for part 2.
 
 ## Day 11
@@ -123,8 +123,8 @@ For part two, just store the coordinates of the max distance while moving throug
 
 ## Day 12
 Standard graph operations, so added the algorithms library which contains a basic Graph implementation. Some 
-additional work was needed, as the input contains bi-directional edges, while the Graph implementation automatically
-creates bi-directional edges. So, I needed to check for existence of the edges before adding them.
+additional work was needed, as the input contains bidirectional edges, while the Graph implementation automatically
+creates bidirectional edges. So, I needed to check for existence of the edges before adding them.
 
 After this, creating groups (```Set<Program>```) for a specific vertex (Program) or all vertices is simple, as long as 
 you remember which vertices have been visited before. 

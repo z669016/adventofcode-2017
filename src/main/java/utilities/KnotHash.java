@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class KnotHash {
-    private int[] list;
+    private final int[] list;
     private int current = 0;
     private int skip = 0;
 
@@ -30,8 +30,14 @@ public class KnotHash {
         moveForward(size);
     }
 
-    public int checksum() {
-        return list[0] * list[1];
+    private static void reverse(int[] list, int current, int size) {
+        final int[] reversed = new int[size];
+
+        for (int idx = 0; idx < size; idx++)
+            reversed[size - idx - 1] = list[(current + idx) % list.length];
+
+        for (int idx = 0; idx < size; idx++)
+            list[(current + idx) % list.length] = reversed[idx];
     }
 
     private void moveForward(int size) {
@@ -41,18 +47,12 @@ public class KnotHash {
         skip++;
     }
 
-    public List<Integer> asList() {
-        return Arrays.stream(list).boxed().collect(Collectors.toList());
+    public int checksum() {
+        return list[0] * list[1];
     }
 
-    private static void reverse(int[] list, int current, int size) {
-        final int[] reversed = new int[size];
-
-        for (int idx = 0; idx < size; idx++)
-            reversed[size - idx - 1] = list[(current + idx) % list.length];
-
-        for (int idx = 0; idx < size; idx++)
-            list[(current + idx) % list.length] = reversed[idx];
+    public List<Integer> asList() {
+        return Arrays.stream(list).boxed().collect(Collectors.toList());
     }
 
     private static List<Integer> sparseHash(List<Integer> input) {
