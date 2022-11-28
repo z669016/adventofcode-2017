@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DanceLine {
-    private char[] line;
+    private final char[] line;
 
     public DanceLine(String line) {
         assert line != null && line.length() > 0;
@@ -16,9 +16,9 @@ public class DanceLine {
 
         moves.forEach(move -> {
             switch (move.charAt(0)) {
-                case 's': spin(moveSize(move)); break;
-                case 'x': exchange(movePos(move, 1), movePos(move, 2)); break;
-                case 'p': partner(moveChar(move, 1), moveChar(move, 2)); break;
+                case 's' -> spin(moveSize(move));
+                case 'x' -> exchange(movePos(move, 1), movePos(move, 2));
+                case 'p' -> partner(moveChar(move, 1), moveChar(move, 2));
             }
         });
     }
@@ -88,8 +88,7 @@ public class DanceLine {
 
         for (int idx = line.length - 1; idx >= size; idx--)
             line[idx] = line[idx - size];
-        for (int idx = 0; idx < size; idx++)
-            line[idx] = temp[idx];
+        if (size >= 0) System.arraycopy(temp, 0, line, 0, size);
     }
 
     private static void exchange(char[] line, int a, int b) {

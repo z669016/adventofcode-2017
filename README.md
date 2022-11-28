@@ -162,14 +162,19 @@ I created a ```Generator``` class which implements ```Supplier<Long>``` to gener
 a ```startValue```, and a Judge to compare the lower 16 bits (```value & 0xffff```). Then compare and count 40 million
 values from both generators.
 
-For part 2, I created a ```MultipleOfGenerator```, which inherits from Generator and addds the multiple-of clause to 
+For part 2, I created a ```MultipleOfGenerator```, which inherits from Generator and adds the multiple-of clause to 
 the ```get()``` method. Then run the same comparison 5 million times with two of this new generators.
 
 ## Day 16
-Okay, where large numbers were no issue on day 15, now they are. Until you consider that the result after each rounds 
-might at some point start to repeat... and indeed after xx dances (where one dance contains all moves as described by 
-the input) the results start to repeat. So, create a list of results (including result 0, the initial value) and the 
-result after 1 bilion repetitions will equal the result after (1.000.000.000 % repeatListSize) ...   
+Created a ```DanceLine``` class, with a ```dance()``` method which can take a list of moves, and process them. 
+For part 1, process all the moves once, and you get the answer. 
+
+Okay, where large numbers were no issue on day 15, now they are for part 2. Until you consider that the result after 
+each round might at some point start to repeat... so, loop for 1 billion times and record the history (results of the
+```DanceLine``` after each```dance()```), and break the loop when a repetition is found. 
+
+And indeed after xx dances (history-size) the results start to repeat. The result after 1 billion repetitions will equal the result 
+after (1.000.000.000 % history-size) ...   
 
 ## Day 17
 A simple update on a ```List``` works well for part 1. For part two however, you need to add too many values to use 
