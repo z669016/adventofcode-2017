@@ -146,10 +146,13 @@ delay a layer with a range of 15 a 1000 times (or more).
 
 ## Day 14
 Part 1 is straight forward ... generate 128 Knot hash values, decode the hex into binary and count all 1. 
-```Character.digit``` and ```Integer.toBinaryString``` are quite helpfull.
-For part 2 I transformed the bit matrix into an ```int[][]``` and replaced all 1 bits with their sequence number. Then 
+```Character.digit``` and ```Integer.toBinaryString``` are quite helpful.
+
+For part 2, I transformed the bit matrix into an ```int[][]``` and replaced all 1 bits with a sequence number. Then 
 I traversed the matrix again and any higher sequence number next to a lower sequence number, got replaced with the 
-lower sequence number.   
+lower sequence number. By first assigning a sequence number and then clustering them into connected regions, I can 
+distinguish the individual regions with different numbers, and count the regions by getting all distinct region 
+numbers.    
 
 ## Day 15
 Hmmm ... I'm not sure where the catch in this one is ... the large numbers are no issue at all. Just an easy star 

@@ -16,13 +16,14 @@ public class DiskGrid {
         return new DiskGrid(IntStream.range(0, 128)
                 .mapToObj(i -> KnotHash.createKey(key + "-" + i))
                 .map(KnotHash::hash)
-                .collect(Collectors.toList()));
+                .toList()
+        );
     }
 
     public DiskGrid(List<String> hexGrid) {
         this.bitGrid = hexGrid.stream()
                 .map(DiskGrid::decode)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public static String decode(String hash) {
@@ -40,7 +41,10 @@ public class DiskGrid {
     }
 
     public long usedBlocks() {
-        return bitGrid.stream().flatMapToInt(String::chars).filter(i -> i == '1').count();
+        return bitGrid.stream()
+                .flatMapToInt(String::chars)
+                .filter(i -> i == '1')
+                .count();
     }
 
     public long regions() {
@@ -48,7 +52,8 @@ public class DiskGrid {
         return Arrays.stream(numbers)
                 .flatMapToInt(Arrays::stream)
                 .filter(i ->  i > 0)
-                .distinct().count();
+                .distinct()
+                .count();
     }
 
     private int[][] clusterRegions() {
@@ -67,7 +72,8 @@ public class DiskGrid {
 
     private int[][] sequenceMatrix() {
         final int[][] numbers =  bitGrid.stream()
-                .map(row -> row.chars().map(c -> c - '0').toArray()).toArray(int[][]::new);
+                .map(row -> row.chars().map(c -> c - '0').toArray())
+                .toArray(int[][]::new);
 
         int count = 1;
         for (int y = 0; y < numbers.length; y++)
@@ -98,20 +104,27 @@ public class DiskGrid {
             numbers[point.y()][point.x()] = count;
 
             if (point.x() < numbers[point.y()].length - 1)
-                if (numbers[point.y()][point.x()+1] != 0 && numbers[point.y()][point.x()+1] != count) queue.offer(Point.of( point.x()+1, point.y()));
+                if (numbers[point.y()][point.x()+1] != 0 && numbers[point.y()][point.x()+1] != count)
+                    queue.offer(Point.of( point.x()+1, point.y()));
+
             if (point.x() > 0)
-                if (numbers[point.y()][point.x()-1] != 0 && numbers[point.y()][point.x()-1] != count) queue.offer(Point.of(point.x()-1, point.y()));
+                if (numbers[point.y()][point.x()-1] != 0 && numbers[point.y()][point.x()-1] != count)
+                    queue.offer(Point.of(point.x()-1, point.y()));
+
             if (point.y() < numbers.length - 1)
-                if (numbers[point.y()+1][point.x()] != 0 && numbers[point.y()+1][point.x()] != count) queue.offer(Point.of( point.x(), point.y()+1));
+                if (numbers[point.y()+1][point.x()] != 0 && numbers[point.y()+1][point.x()] != count)
+                    queue.offer(Point.of( point.x(), point.y()+1));
+
             if (point.y() > 0)
-                if (numbers[point.y()-1][point.x()] != 0 && numbers[point.y()-1][point.x()] != count) queue.offer(Point.of(point.x(), point.y()-1));
+                if (numbers[point.y()-1][point.x()] != 0 && numbers[point.y()-1][point.x()] != count)
+                    queue.offer(Point.of(point.x(), point.y()-1));
         }
     }
 
     public List<String> printable() {
         return  bitGrid.stream()
             .map(DiskGrid::printable)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     private static  String printable(String line) {
