@@ -16,6 +16,6 @@ public class Day17 {
     private static void part(SpinLock spinLock, int max) {
         IntStream.range(1, max + 1).forEach(spinLock::add);
 
-        System.out.println("Next number after inserting 2017 is " + spinLock.get());
+        System.out.println("Next number after inserting " + max + " is " + spinLock.get());
     }
 }

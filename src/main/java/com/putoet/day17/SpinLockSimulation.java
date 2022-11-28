@@ -1,7 +1,5 @@
 package com.putoet.day17;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SpinLockSimulation implements SpinLock {

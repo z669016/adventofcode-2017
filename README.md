@@ -177,10 +177,12 @@ And indeed after xx dances (history-size) the results start to repeat. The resul
 after (1.000.000.000 % history-size) ...   
 
 ## Day 17
-A simple update on a ```List``` works well for part 1. For part two however, you need to add too many values to use 
-a ```List```. However, the answer will be the value after the 0 (always the very first value in the list). So basically, if 
-you would only remember the value inserted when current = 0, that would be the right answer. All other inserted 
-values can be ignored.
+A simple update on a ```List``` using a ```SpinLock``` implementation works well for part 1. 
+
+For part 2 however, you need to add too many values to use a ```List```. However, the answer will be the value after 
+the 0 (always the very first value in the list). So basically, if you would only remember the value inserted when 
+current = 0, that would be the right answer. All other values can be ignored, and don't need to be remembered.
+This was implemented in the ```SpinLockSimulation```.
 
 ## Day 18
 Now this was a fun challenge ... I didn't want to introduce Threads, for that would also require correct 
