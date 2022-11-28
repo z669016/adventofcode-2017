@@ -21,19 +21,13 @@ class JudgeTest {
 
     @Test
     void compare() {
-        IntStream.range(0, 5).forEach(i -> {
-            judge.compare(a.get(), b.get());
-        });
-
+        IntStream.range(0, 5).forEach(i -> judge.compare(a.get(), b.get()));
         assertEquals(1, judge.count());
     }
 
     @Test
     void count() {
-        IntStream.range(0, 40_000_000).forEach(i -> {
-            judge.compare(a.get(), b.get());
-        });
-
+        IntStream.range(0, 40_000_000).forEach(i -> judge.compare(a.get(), b.get()));
         assertEquals(588, judge.count());
     }
 }

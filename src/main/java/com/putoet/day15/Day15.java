@@ -15,11 +15,7 @@ public class Day15 {
 
     private static void judge(Generator a, Generator b, int max) {
         final Judge judge = new Judge();
-
-        IntStream.range(0, max).forEach(i -> {
-            judge.compare(a.get(), b.get());
-        });
-
+        IntStream.range(0, max).forEach(i -> judge.compare(a.get(), b.get()));
         System.out.println("Judge count is " + judge.count());
     }
 }

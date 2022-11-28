@@ -142,7 +142,7 @@ solution. It works well for part 1, and of course part two comes with a twist.
 It takes too much time to run the simulation if you also simulate the delays when they increase above 100.000. First,
 I refactored the creation of the Firewall for each try, and stopped the passing at the very first catch in any layer. 
 That didn't do the trick, and the program also needed an optimization to skip delays, after all, it's pointless to 
-delay a layer with a range of 15 a 1000 times (or more).  
+delay a layer with a range of 15 for 1000 times (or more).  
 
 ## Day 14
 Part 1 is straight forward ... generate 128 Knot hash values, decode the hex into binary and count all 1. 
@@ -157,6 +157,13 @@ numbers.
 ## Day 15
 Hmmm ... I'm not sure where the catch in this one is ... the large numbers are no issue at all. Just an easy star 
 for once? 
+
+I created a ```Generator``` class which implements ```Supplier<Long>``` to generate values using a ```factor``` and 
+a ```startValue```, and a Judge to compare the lower 16 bits (```value & 0xffff```). Then compare and count 40 million
+values from both generators.
+
+For part 2, I created a ```MultipleOfGenerator```, which inherits from Generator and addds the multiple-of clause to 
+the ```get()``` method. Then run the same comparison 5 million times with two of this new generators.
 
 ## Day 16
 Okay, where large numbers were no issue on day 15, now they are. Until you consider that the result after each rounds 
