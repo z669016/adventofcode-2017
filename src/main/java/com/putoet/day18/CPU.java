@@ -2,7 +2,6 @@ package com.putoet.day18;
 
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class CPU {
     private final Map<String,Long> registers = new HashMap<>();
@@ -33,28 +32,28 @@ public class CPU {
         return List.copyOf(recovered);
     }
 
-    public long get(String operant) {
-        assert operant != null && operant.length() > 0;
+    public long get(String operand) {
+        assert operand != null && operand.length() > 0;
 
-        if (isRegister(operant))
-            return registers.get(operant);
+        if (isRegister(operand))
+            return registers.get(operand);
 
-        return Integer.parseInt(operant);
+        return Integer.parseInt(operand);
     }
 
-    public void set(String operant1, long value) {
-        if (!isRegister(operant1))
-            throw new IllegalArgumentException("Cannot set on a value '" + operant1 + "'");
+    public void set(String operand, long value) {
+        if (!isRegister(operand))
+            throw new IllegalArgumentException("Cannot set on a value '" + operand + "'");
 
-        registers.put(operant1, value);
+        registers.put(operand, value);
     }
 
-    private boolean isRegister(String operant) {
-        assert operant != null && operant.length() > 0;
+    private boolean isRegister(String operand) {
+        assert operand != null && operand.length() > 0;
 
-        final boolean isRegister = operant.length() == 1 && Character.isAlphabetic(operant.charAt(0));
-        if (isRegister && !registers.containsKey(operant))
-            registers.put(operant, 0L);
+        final boolean isRegister = operand.length() == 1 && Character.isAlphabetic(operand.charAt(0));
+        if (isRegister && !registers.containsKey(operand))
+            registers.put(operand, 0L);
 
         return isRegister;
     }
@@ -62,7 +61,7 @@ public class CPU {
     public List<Consumer<CPU>> compile(List<String> program) {
         return program.stream()
                 .map(this::compile)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     protected Consumer<CPU> compile(String instruction) {
@@ -78,7 +77,7 @@ public class CPU {
         };
     }
 
-    protected String operant(String instruction, int idx) {
+    protected String operand(String instruction, int idx) {
         assert instruction != null && idx > 0 && idx < 3;
 
         final String[] parts = instruction.split(" ");
@@ -89,35 +88,35 @@ public class CPU {
         if (!instruction.startsWith("snd "))
             throw new IllegalArgumentException("Invalid compiler call for snd");
 
-        return (CPU cpu) -> cpu.played.add(cpu.get(cpu.operant(instruction, 1)));
+        return (CPU cpu) -> cpu.played.add(cpu.get(cpu.operand(instruction, 1)));
     }
 
     protected Consumer<CPU> set(String instruction) {
         if (!instruction.startsWith("set "))
             throw new IllegalArgumentException("Invalid compiler call for set");
 
-        return (CPU cpu) -> cpu.set(cpu.operant(instruction, 1), cpu.get(operant(instruction,2 )));
+        return (CPU cpu) -> cpu.set(cpu.operand(instruction, 1), cpu.get(operand(instruction,2 )));
     }
 
     protected Consumer<CPU> add(String instruction) {
         if (!instruction.startsWith("add "))
             throw new IllegalArgumentException("Invalid compiler call for add");
 
-        return (CPU cpu) -> cpu.set(operant(instruction, 1), cpu.get(operant(instruction, 1)) + cpu.get(operant(instruction,2 )));
+        return (CPU cpu) -> cpu.set(operand(instruction, 1), cpu.get(operand(instruction, 1)) + cpu.get(operand(instruction,2 )));
     }
 
     protected Consumer<CPU> mul(String instruction) {
         if (!instruction.startsWith("mul "))
             throw new IllegalArgumentException("Invalid compiler call for mul");
 
-        return (CPU cpu) -> cpu.set(operant(instruction, 1), cpu.get(operant(instruction, 1)) * cpu.get(operant(instruction,2 )));
+        return (CPU cpu) -> cpu.set(operand(instruction, 1), cpu.get(operand(instruction, 1)) * cpu.get(operand(instruction,2 )));
     }
 
     protected Consumer<CPU> mod(String instruction) {
         if (!instruction.startsWith("mod "))
             throw new IllegalArgumentException("Invalid compiler call for mod");
 
-        return (CPU cpu) -> cpu.set(operant(instruction, 1), cpu.get(operant(instruction, 1)) % cpu.get(operant(instruction,2 )));
+        return (CPU cpu) -> cpu.set(operand(instruction, 1), cpu.get(operand(instruction, 1)) % cpu.get(operand(instruction,2 )));
     }
 
     protected Consumer<CPU> rcv(String instruction) {
@@ -125,7 +124,7 @@ public class CPU {
             throw new IllegalArgumentException("Invalid compiler call for rcv");
 
         return (CPU cpu) -> {
-            if (cpu.get(operant(instruction, 1)) > 0) {
+            if (cpu.get(operand(instruction, 1)) > 0) {
                 if (cpu.played.size() > 0)
                     cpu.recovered.add(cpu.played.get(cpu.played.size() - 1));
             }
@@ -137,8 +136,8 @@ public class CPU {
             throw new IllegalArgumentException("Invalid compiler call for jgz");
 
         return (CPU cpu) -> {
-            if (cpu.get(operant(instruction, 1)) > 0) {
-                final long offset = cpu.get(operant(instruction, 2));
+            if (cpu.get(operand(instruction, 1)) > 0) {
+                final long offset = cpu.get(operand(instruction, 2));
                 if (cpu.ip + offset < 0)
                     throw new IllegalStateException("Invalid instruction '" + instruction + "', jumping outside the program.");
 

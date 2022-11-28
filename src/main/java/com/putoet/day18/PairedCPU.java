@@ -34,7 +34,7 @@ public class PairedCPU extends CPU {
         return (CPU c) -> {
             final PairedCPU cpu = (PairedCPU) c;
             if (cpu.other != null) {
-                final long value = cpu.get(operant(instruction, 1));
+                final long value = cpu.get(operand(instruction, 1));
                 cpu.played.add(value);
                 cpu.other.recovered.offer(value);
             }
@@ -48,7 +48,7 @@ public class PairedCPU extends CPU {
                 cpu.waiting = true;
                 cpu.ip--;
             } else {
-                cpu.set(operant(instruction, 1), cpu.recovered.poll());
+                cpu.set(operand(instruction, 1), cpu.recovered.poll());
             }
         };
     }
