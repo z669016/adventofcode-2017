@@ -245,10 +245,12 @@ search again but filter on the right (longest) length first.
 
 ## Day 25
 I decided not to write a parser to dynamically create the states, so I hardcoded my input. As the number of steps was 
-high, I also decided to use a ```List<BitSet>```s as tape, where each bitset contains 64 positions (I started with a 
-```List<Long>```, but BitSet was easier for it already provides the required operations to set the individual bits).
-Using lambda's for the State operations makes the states, and the Turing machine stunningly simple. Counting the bits 
-set for each bitset and adding them up was also simple. 
+high, I also decided to use a ```List<BitSet>```s as ```Tape```, where each bitset contains 64 positions (I started 
+with a ```List<Long>```, but ```BitSet``` was easier for it already provides the required operations to set the 
+individual bits).
+
+Using lambda's for the State operations makes the states, and the ```Turing``` machine stunningly simple. Counting the 
+bits set for each bitset and adding them up was also simple. 
 
   
  

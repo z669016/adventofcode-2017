@@ -34,9 +34,6 @@ public class Tape {
         return bits.size();
     }
 
-    public int cursor() { return cursor; }
-    public int offset() { return offset; }
-
     public int read() {
         final int index = (offset + cursor) / 64;
         final BitSet bitset = bits.get(index);
@@ -64,6 +61,6 @@ public class Tape {
     @Override
     public String toString() {
         return String.format("{blocks: %d, offset: %d, cursor: %d, %s}",
-                blocks(), offset, cursor, bits.toString());
+                blocks(), offset, cursor, bits);
     }
 }

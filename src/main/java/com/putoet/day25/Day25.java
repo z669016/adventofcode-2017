@@ -14,7 +14,7 @@ public class Day25 {
 
         turing.run(12964419);
 
-        System.out.println("Diagnistic checksum is " + tape.bitsSet());
+        System.out.println("Diagnostic checksum is " + tape.bitsSet());
     }
 
     private static State a() {

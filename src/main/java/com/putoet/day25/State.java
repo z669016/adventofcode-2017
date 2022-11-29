@@ -2,7 +2,7 @@ package com.putoet.day25;
 
 import java.util.function.Function;
 
-public class State {
+public class State implements Function<Tape,String> {
     private final String name;
     private final Function<Tape,String> onZero;
     private final Function<Tape,String> onOne;

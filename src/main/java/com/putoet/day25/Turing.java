@@ -23,13 +23,9 @@ public class Turing {
             current = state;
     }
 
-    public void setState(String name) {
-        current = states.get(name);
-    }
-
     public void run(int count) {
         for (int i = 0; i < count; i++) {
-            String next = current.apply(tape);
+            final String next = current.apply(tape);
             current = states.get(next);
         }
     }
