@@ -39,8 +39,7 @@ public class Component {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Component)) return false;
-        Component component = (Component) o;
+        if (!(o instanceof Component component)) return false;
         return id == component.id;
     }
 

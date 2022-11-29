@@ -2,7 +2,6 @@ package com.putoet.day24;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Components {
@@ -22,7 +21,7 @@ public class Components {
                     final String[] ports = lines.get(id).split("/");
                     return new Component(id, Integer.parseInt(ports[0]), Integer.parseInt(ports[1]));
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         return new Components(list);
     }
@@ -32,7 +31,7 @@ public class Components {
     }
 
     public List<Component> forPort(int port) {
-        return list.stream().filter(c -> c.hasPort(port)).collect(Collectors.toList());
+        return list.stream().filter(c -> c.hasPort(port)).toList();
     }
 
     public void use(Component component) {

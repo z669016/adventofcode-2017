@@ -237,10 +237,11 @@ the numbers between values of b and c which are non-prime numbers. I didn't solv
 from Reddit. Sorry, just not my type of puzzle.
 
 ## Day 24
-Quite simple if you use a kind of depth-first-search to create bridges (chains of components) from the options you 
-have, and collect all possible bridges that cannot be extended any further from the components left. For part one,
-just find the strongest. For part two, first find the length of the longest bridge, then do the max search again 
-but filter on the right (longest) length first.
+Quite simple if you use a kind of depth-first-search to create ```Bridge```s (chains of ```Component```s) from the 
+options you have, and collect all possible bridges that cannot be extended any further from the components left.
+
+For part one, just find the strongest. For part two, first find the length of the longest bridge, then do the max 
+search again but filter on the right (longest) length first.
 
 ## Day 25
 I decided not to write a parser to dynamically create the states, so I hardcoded my input. As the number of steps was 

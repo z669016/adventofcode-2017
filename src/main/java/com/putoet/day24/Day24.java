@@ -12,17 +12,17 @@ public class Day24 {
         final List<Bridge> bridges = bridges();
 
         System.out.println("From the list, you can create " + bridges.size() + " different bridges.");
-        int strongest = bridges.stream().mapToInt(Bridge::strength).max().getAsInt();
+        int strongest = bridges.stream().mapToInt(Bridge::strength).max().orElseThrow();
         System.out.println("The strongest bridge has strength " + strongest);
 
-        final int longest = bridges.stream().mapToInt(Bridge::length).max().getAsInt();
+        final int longest = bridges.stream().mapToInt(Bridge::length).max().orElseThrow();
         strongest = bridges.stream()
                 .filter(bridge -> bridge.length() == longest)
                 .mapToInt(Bridge::strength)
                 .max()
-                .getAsInt();
+                .orElseThrow();
 
-        System.out.println("The strngest longest bridge is " + strongest);
+        System.out.println("The strongest longest bridge is " + strongest);
     }
 
     public static List<Bridge> bridges() {

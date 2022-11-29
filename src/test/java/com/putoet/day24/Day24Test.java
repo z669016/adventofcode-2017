@@ -12,7 +12,7 @@ class Day24Test {
         final List<Bridge> bridges = Day24.bridges();
         bridges.forEach(System.out::println);
 
-        final int strongest = bridges.stream().mapToInt(Bridge::strength).max().getAsInt();
+        final int strongest = bridges.stream().mapToInt(Bridge::strength).max().orElseThrow();
 
         assertEquals(31, strongest);
     }
