@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class Day20Test {
@@ -20,7 +19,7 @@ class Day20Test {
         List<Particle> particles = IntStream.range(0, lines.size())
                 .mapToObj(i -> Particle.of(i, lines.get(i)))
                 .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
+                .toList();
 
 
         particles = Day20.removeColliding(particles);

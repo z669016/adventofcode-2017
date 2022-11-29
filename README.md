@@ -30,8 +30,8 @@ contained the easy dividable values per row, and then sum the division of each p
 
 ## Day 3
 Looking at the spiral, you can also see squares, where the outer square starts at the right of the last number of the 
-inner square. The inner square has size 1x1, the next square has size 3x3, and each next square is 2 elements bigger 
-in size, containing 8 more numbers than the inner square.
+inner square. The inner square has size 1x1, the next square has size 3x3, and each next square is 2 elements larger, 
+containing 8 more numbers than the inner square.
 
 It takes some puzzling, but based on that pattern, when value 1 is at coordinates (0,0), you can calculate the sequence
 number for any coordinate of the matrix, and v.v. 
@@ -203,22 +203,23 @@ you can use it to gather the letters (part 1), or calculate the number of steps 
 each tube is simply the Manhattan distance between its start and end point. 
 
 ## Day 20
-This required some thinking ... and validation math for part 1. The particle that will in the end be closest th
+This required some thinking ... and validation math for part 1. The ```Particle``` that will in the end be closest to
 the origin will be the one with the smallest acceleration (Manhattan distance). If two accelerations are equal, 
 the one with the smallest delta between two steps will win, and if even those are equal, then the particle that 
-starts closest to the origin will win. Wrap this in a ```compareTo())``` method, create a list of ```Particle```
+starts closest to the origin will win. I wrapped this in a ```compareTo()``` method, create a list of ```Particle```s
 and sort it in natural order. The first particle in the list will be the right answer for part 1.
 
-Part 2 can probably be calculated, but you can also just simulate moving forward and after eacht step removing 
-all Particles with the same position. The stream API works well for this. The questio is when to stop
-moving forward ... I decided to stop if the list didn't change for 1000 consecutive steps.    
+Part 2 can probably be calculated, but you can also just simulate moving forward and after each step removing 
+all Particles with the same position (to prevent unnecessary calculations). The stream API works well for this. The 
+question is when to stop moving forward ... I decided to stop if the list didn't change for 1000 consecutive steps.
+The size of the remaining list of particles is the answer for part 2.
   
 ## Day 21
-A nasty one this time ... first I had a mistake in one of the rotations (indeed, didn't completely tested them),
-then I missedd some combinations of flipping and rotating. Lost quite some time finding that issue.
+A nasty one this time ... first I had a mistake in one of the rotations (indeed, didn't completely test them),
+then I missed some combinations of flipping and rotating. Lost quite some time finding that issue.
 
 ## Day 22
-Pretty straight forward ... took some of the grid-methods from day 21 and moved them into a GridUtils class for reuse,
+Pretty straight forward ... took some grid-methods from day 21 and moved them into a GridUtils class for reuse,
 also added a method to grow the current grid (current size * 3 and the old grid comes in the center of the new one).
 Created a Direction object with methods for turning the current direction. Created a Virus class to navigate the grid, 
 determine next direction based on state of the current node, affect the current node, and keep counters. For part 2, 
@@ -227,7 +228,7 @@ affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fa
 
 ## Day 23
 Part one is straight forward ... part 2 requires you to analyse the assembly code and determine what it does. It counts
-the numbers between values of b and c which are non prime numbers.
+the numbers between values of b and c which are non-prime numbers.
 
 ## Day 24
 Quite simple if you use a kind of depth-first-search to create bridges (chains of components) from the options you 
