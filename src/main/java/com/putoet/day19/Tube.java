@@ -7,7 +7,7 @@ import java.util.List;
 public record Tube(Point start, Point end, List<Character> letters) {
 
     public long steps() {
-        return Math.abs(start.x() - end.x()) + Math.abs(start.y() - end.y());
+        return end.manhattanDistance(start);
     }
 
     @Override

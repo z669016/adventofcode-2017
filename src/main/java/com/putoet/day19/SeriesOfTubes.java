@@ -13,6 +13,7 @@ public class SeriesOfTubes {
         UP,
         RIGHT
     }
+
     private static final char VERTICAL_LINE = '|';
     private static final char HORIZONTAL_LINE = '-';
     private static final char CORNER = '+';
@@ -52,7 +53,7 @@ public class SeriesOfTubes {
         return new SeriesOfTubes(grid, tubes);
     }
 
-   private static char[][] grid(List<String> lines) {
+    private static char[][] grid(List<String> lines) {
         final OptionalInt maxLen = lines.stream().mapToInt(String::length).max();
         if (maxLen.isEmpty())
             throw new IllegalArgumentException("Invalid grid drawing!");
@@ -104,7 +105,6 @@ public class SeriesOfTubes {
                         break;
                     }
                 } while (grid[y][x] != CORNER);
-
             }
             case UP -> {
                 do {
@@ -153,10 +153,10 @@ public class SeriesOfTubes {
     private static Direction direction(char[][] grid, Point point) {
         final int y = point.y(), x = point.x();
 
-        if (y < grid.length - 1 && verticalSymbol(grid[y+1][x])) return Direction.DOWN;
-        if (y > 0 && verticalSymbol(grid[y-1][x])) return Direction.UP;
-        if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x+1])) return Direction.RIGHT;
-        if (x > 0 && horizontalSymbol(grid[y][x-1])) return Direction.LEFT;
+        if (y < grid.length - 1 && verticalSymbol(grid[y + 1][x])) return Direction.DOWN;
+        if (y > 0 && verticalSymbol(grid[y - 1][x])) return Direction.UP;
+        if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x + 1])) return Direction.RIGHT;
+        if (x > 0 && horizontalSymbol(grid[y][x - 1])) return Direction.LEFT;
 
         throw new IllegalStateException("Could not determine direction from point " + point);
     }
@@ -173,11 +173,11 @@ public class SeriesOfTubes {
         final int y = tube.end().y(), x = tube.end().x();
 
         if (tube.start().y() != tube.end().y()) {
-            if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x+1])) return Direction.RIGHT;
-            if (x > 0 && horizontalSymbol(grid[y][x-1])) return Direction.LEFT;
+            if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x + 1])) return Direction.RIGHT;
+            if (x > 0 && horizontalSymbol(grid[y][x - 1])) return Direction.LEFT;
         } else {
-            if (y < grid.length - 1 && verticalSymbol(grid[y+1][x])) return Direction.DOWN;
-            if (y > 0 && verticalSymbol(grid[y-1][x])) return Direction.UP;
+            if (y < grid.length - 1 && verticalSymbol(grid[y + 1][x])) return Direction.DOWN;
+            if (y > 0 && verticalSymbol(grid[y - 1][x])) return Direction.UP;
         }
         throw new IllegalStateException("Could not determine direction from previous tube " + tube);
     }

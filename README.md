@@ -196,12 +196,15 @@ behaviour for the ```snd()``` and ```rcv()``` methods, where it sends/receives o
 
 ## Day 19
 And ... another fun challenge. Not that complicated though, once you have created a list of "tubes" with data 
-on their start and end point, and the list of letters they might contain. For building the list, the challenge
-is in determining the right direction, which is a bit more difficult for a tube starting at a crossing (+ sign).
+on their start and end point, and the list of letters they might contain. The input is processed by the
+```SeriesOfTubes.of()``` factory method. For building the list, the challenge is in determining the right direction, 
+which is a bit more difficult for a tube starting at a crossing (+ sign). Once you have the list of ```Tube```s,
+you can use it to gather the letters (part 1), or calculate the number of steps (part 2). The number of steps for
+each tube is simply the Manhattan distance between its start and end point. 
 
 ## Day 20
 This required some thinking ... and validation math for part 1. The particle that will in the end be closest th
-the origin will be the one with the smallest acceleration (Manhatten distance). If two accellerations are equal, 
+the origin will be the one with the smallest acceleration (Manhattan distance). If two accelerations are equal, 
 the one with the smallest delta between two steps will win, and if even those are equal, then the particle that 
 starts closest to the origin will win. Wrap this in a ```compareTo())``` method, create a list of ```Particle```
 and sort it in natural order. The first particle in the list will be the right answer for part 1.
