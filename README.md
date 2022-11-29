@@ -224,12 +224,12 @@ transformation rule for each enhancement. You need to cover no-flip and rotation
 vertical flip and rotation, horizontal and vertical flip and rotation, and vertical and horizontal flip and rotation.
 
 ## Day 22
-Pretty straight forward ... took some grid-methods from day 21 and moved them into a GridUtils class for reuse,
-also added a method to grow the current grid (current size * 3 and the old grid comes in the center of the new one).
-Created a Direction object with methods for turning the current direction. Created a Virus class to navigate the grid, 
-determine next direction based on state of the current node, affect the current node, and keep counters. For part 2, 
-just created a SmarterVirus (which inherits from Virus) with different methods to determine the next direction, and 
-affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fast.
+Pretty straight forward ... reusing the GidUtils class.
+
+Created a ```Direction``` object with methods for turning the current direction. Created a ```Virus``` class to 
+navigate the grid, determine next direction based on state of the current node, affect the current node, and keep 
+counters. For part 2, just created a ```SmarterVirus``` (which inherits from ```Virus```) with different methods to 
+determine the next direction, and affecting the current node. Even the 10.000.000 bursts of part 2, went pretty fast.
 
 ## Day 23
 Part one is straight forward ... part 2 requires you to analyse the assembly code and determine what it does. It counts

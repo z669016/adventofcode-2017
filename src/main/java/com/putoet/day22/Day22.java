@@ -19,6 +19,6 @@ public class Day22 {
         for (int i = 0; i < count; i++) {
             grid = virus.burst(grid);
         }
-        System.out.println("# infections by busts is " + virus.burstInfectedCount());
+        System.out.println("# infections by " + count + " bursts is " + virus.burstInfectedCount());
     }
 }

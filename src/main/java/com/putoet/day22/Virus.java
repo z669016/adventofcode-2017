@@ -8,29 +8,15 @@ public class Virus {
     public static final char CLEAN = '.';
 
     private Direction direction = Direction.UP;
-    private int burstCount = 0;
     private int burstInfectedCount = 0;
-    private int burstCleanedCount = 0;
     private Point position;
 
     public Virus(Point start) {
         this.position = start;
     }
 
-    public Point position() { return position; }
-    public char marker() {
-        return switch (direction) {
-            case UP -> '^';
-            case RIGHT -> '>';
-            case DOWN -> 'v';
-            case LEFT -> '<';
-        };
-    }
-
     public Direction direction() { return direction; }
-    public int burstCount() { return burstCount; }
     public int burstInfectedCount() { return burstInfectedCount; }
-    public int burstCleanedCount() { return burstCleanedCount; }
 
     public char[][] burst(char[][] grid) {
         grid = checkPosition(grid);
@@ -38,8 +24,6 @@ public class Virus {
         direction = direction(currentNode(grid));
         affectCurrentPosition(grid);
         moveForward();
-
-        burstCount++;
 
         return grid;
     }
@@ -58,7 +42,6 @@ public class Virus {
 
     protected void clean(char[][] grid) {
         currentNode(grid, CLEAN);
-        burstCleanedCount++;
     }
 
     protected Direction direction(char state) {
