@@ -13,7 +13,7 @@ public class CPU {
     public static final char REG_G = 'g';
     public static final char REG_H = 'h';
 
-    private int[] regs = new int[8];
+    private final int[] regs = new int[8];
     private int ip;
 
     private boolean debug = true;

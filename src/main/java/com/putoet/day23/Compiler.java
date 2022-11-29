@@ -40,14 +40,10 @@ public class Compiler {
         final char x = sx.charAt(0);
         if (Character.isLetter(sy.charAt(0))) {
             final char y = sy.charAt(0);
-            return (cpu -> {
-                cpu.set(x, y);
-            });
+            return (cpu -> cpu.set(x, y));
         } else {
             final int y = Integer.parseInt(sy);
-            return (cpu -> {
-                cpu.set(x, y);
-            });
+            return (cpu -> cpu.set(x, y));
         }
     }
 
@@ -55,14 +51,10 @@ public class Compiler {
         final char x = sx.charAt(0);
         if (Character.isLetter(sy.charAt(0))) {
             final char y = sy.charAt(0);
-            return (cpu -> {
-                cpu.set(x, cpu.get(x) - cpu.get(y));
-            });
+            return (cpu -> cpu.set(x, cpu.get(x) - cpu.get(y)));
         } else {
             final int y = Integer.parseInt(sy);
-            return (cpu -> {
-                cpu.set(x, cpu.get(x) - y);
-            });
+            return (cpu -> cpu.set(x, cpu.get(x) - y));
         }
     }
 

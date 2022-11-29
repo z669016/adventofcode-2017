@@ -233,7 +233,8 @@ determine the next direction, and affecting the current node. Even the 10.000.00
 
 ## Day 23
 Part one is straight forward ... part 2 requires you to analyse the assembly code and determine what it does. It counts
-the numbers between values of b and c which are non-prime numbers.
+the numbers between values of b and c which are non-prime numbers. I didn't solve this one myself, but got the solution
+from Reddit. Sorry, just not my type of puzzle.
 
 ## Day 24
 Quite simple if you use a kind of depth-first-search to create bridges (chains of components) from the options you 
