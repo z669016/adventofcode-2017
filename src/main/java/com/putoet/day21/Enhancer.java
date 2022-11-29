@@ -7,11 +7,9 @@ import java.util.stream.Collectors;
 
 public class Enhancer {
     public static final char[][] INITIAL_GRID = string2grid(".#./..#/###");
-    public static final String SEPERATOR = "/";
+    public static final String SEPARATOR = "/";
 
     private final Map<String, char[][]> rules = new HashMap<>();
-
-    public Map<String,char[][]> rules() {return Collections.unmodifiableMap(rules); }
 
     private void addRule(String from, String to) {
         rules.put(from, string2grid(to));
@@ -34,9 +32,6 @@ public class Enhancer {
         final String key = grid2String(fromGrid, fromYOffset, fromXOffset);
         final char[][] transformation = selectRule(key);
 
-        if (transformation == null)
-            throw new IllegalStateException("No transformation for '" + key + "' starting at offset " + fromYOffset);
-
         final int fromSize = gridSize(fromGrid);
         final int yOffset = fromYOffset / fromSize;
         final int xOffset = fromXOffset / fromSize;
@@ -45,8 +40,7 @@ public class Enhancer {
         final int toXOffset = xOffset * toSize;
 
         for (int y = 0; y < toSize; y++)
-            for (int x = 0; x < toSize; x++)
-                toGrid[y+toYOffset][x+toXOffset] = transformation[y][x];
+            System.arraycopy(transformation[y], 0, toGrid[y + toYOffset], toXOffset, toSize);
     }
 
     private char[][] selectRule(String grid) {
@@ -73,38 +67,23 @@ public class Enhancer {
 
     private char[][] selectFlipRule(String grid) {
         String flipped = horizontalFlip(grid);
-        if (rules.containsKey(flipped))
-            return rules.get(flipped);
-
         char[][] rotatedFlipped = selectRotationRule(flipped);
         if (rotatedFlipped != null)
             return rotatedFlipped;
 
         flipped = verticalFlip(grid);
-        if (rules.containsKey(flipped))
-             return rules.get(flipped);
-
         rotatedFlipped = selectRotationRule(flipped);
         if (rotatedFlipped != null)
             return rotatedFlipped;
 
         flipped = horizontalFlip(verticalFlip(grid));
-        if (rules.containsKey(flipped))
-            return rules.get(flipped);
-
         rotatedFlipped = selectRotationRule(flipped);
         if (rotatedFlipped != null)
             return rotatedFlipped;
 
         flipped = verticalFlip(horizontalFlip(grid));
-        if (rules.containsKey(flipped))
-            return rules.get(flipped);
-
         rotatedFlipped = selectRotationRule(flipped);
-        if (rotatedFlipped != null)
-            return rotatedFlipped;
-
-        return null;
+        return rotatedFlipped;
     }
 
     public static String horizontalFlip(String grid) {
@@ -120,17 +99,17 @@ public class Enhancer {
         switch (grid.length()) {
             case 5 -> sb.append(grid.charAt(1))
                     .append(grid.charAt(0))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(4))
                     .append(grid.charAt(3));
             case 11 -> sb.append(grid.charAt(2))
                     .append(grid.charAt(1))
                     .append(grid.charAt(0))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(6))
                     .append(grid.charAt(5))
                     .append(grid.charAt(4))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(10))
                     .append(grid.charAt(9))
                     .append(grid.charAt(8));
@@ -154,17 +133,17 @@ public class Enhancer {
         switch (grid.length()) {
             case 5 -> sb.append(grid.charAt(3))
                     .append(grid.charAt(4))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(0))
                     .append(grid.charAt(1));
             case 11 -> sb.append(grid.charAt(8))
                     .append(grid.charAt(9))
                     .append(grid.charAt(10))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(4))
                     .append(grid.charAt(5))
                     .append(grid.charAt(6))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(0))
                     .append(grid.charAt(1))
                     .append(grid.charAt(2));
@@ -188,17 +167,17 @@ public class Enhancer {
         switch (grid.length()) {
             case 5 -> sb.append(grid.charAt(3))
                     .append(grid.charAt(0))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(4))
                     .append(grid.charAt(1));
             case 11 -> sb.append(grid.charAt(8))
                     .append(grid.charAt(4))
                     .append(grid.charAt(0))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(9))
                     .append(grid.charAt(5))
                     .append(grid.charAt(1))
-                    .append(SEPERATOR)
+                    .append(SEPARATOR)
                     .append(grid.charAt(10))
                     .append(grid.charAt(6))
                     .append(grid.charAt(2));
@@ -217,7 +196,7 @@ public class Enhancer {
         return Arrays.stream(grid)
                 .sequential()
                 .map(String::valueOf)
-                .collect(Collectors.joining(SEPERATOR));
+                .collect(Collectors.joining(SEPARATOR));
     }
 
     public static String grid2String(char[][] grid, int yOffset, int xOffset) {
@@ -228,14 +207,14 @@ public class Enhancer {
                 sb.append(grid[y + yOffset][x + xOffset]);
             }
             if (y < size - 1)
-                sb.append(SEPERATOR);
+                sb.append(SEPARATOR);
         }
 
         return sb.toString();
     }
 
     public static char[][] string2grid(String line) {
-        return Arrays.stream(line.split(SEPERATOR))
+        return Arrays.stream(line.split(SEPARATOR))
                 .sequential()
                 .map(String::toCharArray)
                 .toArray(char[][]::new);

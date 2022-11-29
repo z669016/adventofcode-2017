@@ -218,6 +218,11 @@ The size of the remaining list of particles is the answer for part 2.
 A nasty one this time ... first I had a mistake in one of the rotations (indeed, didn't completely test them),
 then I missed some combinations of flipping and rotating. Lost quite some time finding that issue.
 
+I've created an ```Enhancer``` class, that loads a set of enhancer rules. It is capable of transforming a grid according
+to the rules a number of times. You need to ensure you cover all possible rotation and flipping to find the right 
+transformation rule for each enhancement. You need to cover no-flip and rotation, a horizontal flip anr rotation,
+vertical flip and rotation, horizontal and vertical flip and rotation, and vertical and horizontal flip and rotation.
+
 ## Day 22
 Pretty straight forward ... took some grid-methods from day 21 and moved them into a GridUtils class for reuse,
 also added a method to grow the current grid (current size * 3 and the old grid comes in the center of the new one).

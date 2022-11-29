@@ -58,7 +58,6 @@ class EnhancerTest {
             System.out.println(grid);
             Arrays.stream(grid.split("/")).forEach(System.out::println);
             System.out.println();
-
         }
     }
 
