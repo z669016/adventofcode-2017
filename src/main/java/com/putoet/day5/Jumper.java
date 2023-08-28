@@ -1,20 +1,17 @@
 package com.putoet.day5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Jumper {
-    private final List<Integer> jumps;
+    private final int[] jumps;
     private final boolean decrease;
 
-    public Jumper(List<Integer> jumps) {
+    public Jumper(int[] jumps) {
         this(jumps, false);
     }
 
-    public Jumper(List<Integer> jumps, boolean decrease) {
-        assert jumps != null && jumps.size() > 0;
+    public Jumper(int[] jumps, boolean decrease) {
+        assert jumps != null && jumps.length > 0;
 
-        this.jumps = new ArrayList<>(jumps);
+        this.jumps = jumps;
         this.decrease = decrease;
     }
 
@@ -22,12 +19,12 @@ public class Jumper {
         int ip = 0;
         int count = 0;
 
-        while (ip >= 0 && ip < jumps.size()) {
+        while (ip >= 0 && ip < jumps.length) {
             final int current = ip;
-            final int offset = jumps.get(current);
+            final int offset = jumps[current];
 
             ip += offset;
-            jumps.set(current, decrease ? decrease(offset) : increase(offset));
+            jumps[current] = decrease ? decrease(offset) : increase(offset);
             count++;
         }
 
