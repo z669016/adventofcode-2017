@@ -2,9 +2,6 @@ package com.putoet.day2;
 
 import com.putoet.resources.ResourceLines;
 import com.putoet.utils.Timer;
-import org.javatuples.Pair;
-
-import java.util.List;
 
 public class Day2 {
     public static void main(String[] args) {
