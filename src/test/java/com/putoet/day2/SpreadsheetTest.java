@@ -44,13 +44,13 @@ class SpreadsheetTest {
 
     @Test
     void evenlyDividableValues() {
-        final List<String> matrix = List.of(
+        final var matrix = List.of(
                 "5\t9\t2\t8",
                 "9\t4\t7\t3",
                 "3\t8\t6\t5"
         );
-        final Spreadsheet spreadsheet = Spreadsheet.of(matrix);
-        final List<Pair<Integer,Integer>> evenlyDividableValues = spreadsheet.evenlyDividableValues();
+        final var spreadsheet = Spreadsheet.of(matrix);
+        final var evenlyDividableValues = spreadsheet.evenlyDividableValues();
 
         assertEquals(List.of(Pair.with(8, 2), Pair.with(9, 3), Pair.with(6, 3)), evenlyDividableValues);
     }
