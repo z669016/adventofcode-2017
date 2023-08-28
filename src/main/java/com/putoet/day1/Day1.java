@@ -1,17 +1,18 @@
 package com.putoet.day1;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 public class Day1 {
     public static void main(String[] args) {
-        final String input = ResourceLines.line("/day1.txt");
+        final var input = ResourceLines.line("/day1.txt");
 
-        System.out.println("Sum is " + sum(IntProducer.of(input)));
-        System.out.println("Sum2 is " + sum(IntProducer2.of(input)));
+        Timer.run(() -> System.out.println("Sum is " + sum(IntProducer.of(input))));
+        Timer.run(() -> System.out.println("Sum2 is " + sum(IntProducer2.of(input))));
     }
 
     private static int sum(IntProducer producer) {
-        int sum = 0;
+        var sum = 0;
         while (producer.hasNext()) {
             if (producer.get() == producer.next())
                 sum += producer.next();

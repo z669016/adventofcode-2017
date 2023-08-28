@@ -1,17 +1,18 @@
 package com.putoet.day1;
 
-public class IntProducer {
+import org.jetbrains.annotations.NotNull;
+
+class IntProducer {
     protected final String lineOfInt;
     protected int idx = 0;
     protected final int offset;
 
-    protected IntProducer(String lineOfInt, int offset) {
+    protected IntProducer(@NotNull String lineOfInt, int offset) {
         this.lineOfInt = lineOfInt;
         this.offset = offset;
     }
 
-    public static IntProducer of(String lineOfInt) {
-        assert lineOfInt != null;
+    public static IntProducer of(@NotNull String lineOfInt) {
         assert lineOfInt.matches("[0-9]+");
 
         return new IntProducer(lineOfInt, 0);

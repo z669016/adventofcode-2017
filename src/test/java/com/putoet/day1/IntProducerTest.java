@@ -8,7 +8,7 @@ class IntProducerTest {
 
     @Test
     void of() {
-        final IntProducer producer = IntProducer.of("12345");
+        final var producer = IntProducer.of("12345");
 
         assertTrue(producer.hasNext());
 
