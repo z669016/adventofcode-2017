@@ -11,7 +11,7 @@ class Day6Test {
 
     @Test
     void redistribute() {
-        List<Integer> next = Day6.redistribute(memoryBanks);
+        var next = Day6.redistribute(memoryBanks);
         assertEquals(List.of(2, 4, 1, 2), next);
 
         next = Day6.redistribute(next);
