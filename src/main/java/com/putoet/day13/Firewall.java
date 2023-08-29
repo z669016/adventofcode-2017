@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Firewall {
+class Firewall {
     public static class FirewallLayer implements Layer {
         private final int range;
         private int scanner = 0;
@@ -80,7 +80,7 @@ public class Firewall {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder();
+            final var sb = new StringBuilder();
             for (int i = 0; i < range; i++) {
                 if (i == scanner)
                     sb.append(i == 0 && entered ? "[@] " : "[.] ");
@@ -101,8 +101,8 @@ public class Firewall {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        for (int idx = 0; idx < layers.size(); idx++)
+        final var sb = new StringBuilder();
+        for (var idx = 0; idx < layers.size(); idx++)
             sb.append(idx).append(": ").append(layers.get(idx)).append("\n");
 
         return sb.toString();
@@ -115,21 +115,21 @@ public class Firewall {
     public void pass(long delay) {
         layers.forEach(layer -> layer.init(delay));
 
-        for (int position = 0; position < layers.size(); position++) {
+        for (var position = 0; position < layers.size(); position++) {
             layers.get(position).enter();
             layers.forEach(Layer::next);
             layers.get(position).leave();
 
-            // break the loop to speed up things
+            // break the loop to speed things up
             if (delay > 0 && caught())
                 return;
         }
     }
 
     public int severity() {
-        int severity = 0;
-        for (int idx = 0; idx < layers.size(); idx++) {
-            final Layer layer = layers.get(idx);
+        var severity = 0;
+        for (var idx = 0; idx < layers.size(); idx++) {
+            final var layer = layers.get(idx);
 
             if (layers.get(idx).caught())
                 severity += (idx * layer.range());
@@ -149,21 +149,20 @@ public class Firewall {
     public List<Layer> layers() { return Collections.unmodifiableList(layers); }
 
     public static Firewall of(List<String> lines) {
-        final List<Layer> layers = new ArrayList<>();
+        final var layers = new ArrayList<Layer>();
         lines.forEach(line -> {
-            final String[] numbers = line.split(": ");
+            final var numbers = line.split(": ");
             if (numbers.length != 2)
                 throw new IllegalArgumentException("Invalid firewall definition '" + line + "'");
 
-            final int depth = Integer.parseInt(numbers[0]);
-            final int range = Integer.parseInt(numbers[1]);
+            final var depth = Integer.parseInt(numbers[0]);
+            final var range = Integer.parseInt(numbers[1]);
 
             while (depth > layers.size())
                 layers.add(emptyLayer());
 
             layers.add(new FirewallLayer(range));
         });
-
 
         return new Firewall(layers);
     }

@@ -9,20 +9,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FirewallTest {
+    public static final List<String> LINES = ResourceLines.list("/day13.txt");
     private Firewall firewall;
 
     @BeforeEach
     void setup() {
-        final List<String> lines = ResourceLines.list("/day13.txt");
-        firewall = Firewall.of(lines);
+        firewall = Firewall.of(LINES);
     }
 
     @Test
     void of() {
-        final List<String> lines = ResourceLines.list("/day13.txt");
-        final Firewall firewall = Firewall.of(lines);
-
-        final List<Layer> layers = firewall.layers();
+        final var layers = firewall.layers();
         assertEquals(7, layers.size());
         assertEquals(3, layers.get(0).range());
         assertEquals(2, layers.get(1).range());
@@ -37,7 +34,7 @@ class FirewallTest {
     void layer() {
         assertThrows(AssertionError.class, () -> new Firewall.FirewallLayer(1));
 
-        final Layer layer = new Firewall.FirewallLayer(3);
+        final var layer = new Firewall.FirewallLayer(3);
         assertEquals(0, layer.scanner());
         layer.next();
         assertEquals(1, layer.scanner());

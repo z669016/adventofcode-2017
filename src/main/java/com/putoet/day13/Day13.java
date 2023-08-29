@@ -1,25 +1,28 @@
 package com.putoet.day13;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.List;
 
 public class Day13 {
     public static void main(String[] args) {
-        final List<String> lines = ResourceLines.list("/day13.txt");
-        Firewall firewall = Firewall.of(lines);
+        final Firewall firewall = Firewall.of(ResourceLines.list("/day13.txt"));
 
-        firewall.pass();
-        System.out.println("Severity is " + firewall.severity());
+        Timer.run(() -> {
+            firewall.pass();
+            System.out.println("Severity is " + firewall.severity());
+        });
 
-        long delay = 0;
-        do {
-            delay++;
-            firewall.reset();
-            firewall.pass(delay);
-        } while (firewall.caught());
+        Timer.run(() -> {
+            long delay = 0;
+            do {
+                delay++;
+                firewall.reset();
+                firewall.pass(delay);
+            } while (firewall.caught());
 
-        System.out.println();
-        System.out.println("You can pass without being caught with a delay of " + delay);
+            System.out.println("You can pass without being caught with a delay of " + delay);
+        });
     }
 }

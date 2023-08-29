@@ -1,6 +1,6 @@
 package com.putoet.day13;
 
-public interface Layer {
+interface Layer {
     void init(long delay);
     void next();
     void enter();
