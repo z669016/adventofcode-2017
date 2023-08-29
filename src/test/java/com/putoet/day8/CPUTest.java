@@ -3,9 +3,6 @@ package com.putoet.day8;
 import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.OptionalInt;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CPUTest {
@@ -14,13 +11,13 @@ class CPUTest {
 
     @Test
     void getRegister() {
-        final CPU cpu = new CPU();
+        final var cpu = new CPU();
         assertEquals(0, cpu.getRegister(A));
     }
 
     @Test
     void incRegister() {
-        final CPU cpu = new CPU();
+        final var cpu = new CPU();
 
         cpu.incRegister(A, 7, c -> true);
         assertEquals(7, cpu.getRegister(A));
@@ -34,7 +31,7 @@ class CPUTest {
 
     @Test
     void decRegister() {
-        final CPU cpu = new CPU();
+        final var cpu = new CPU();
 
         cpu.decRegister(B, 2, c -> true);
         assertEquals(-2, cpu.getRegister(B));
@@ -48,15 +45,13 @@ class CPUTest {
 
     @Test
     void run() {
-        final List<String> lines = ResourceLines.list("/day8.txt");
-        final CPU cpu = CPU.run(lines);
+        final var lines = ResourceLines.list("/day8.txt");
+        final var cpu = CPU.run(lines);
 
-        final OptionalInt max = cpu.highestRegisterValue();
-        assertTrue(max.isPresent());
-        assertEquals(1, max.getAsInt());
+        final var max = cpu.highestRegisterValue().orElseThrow();
+        assertEquals(1, max);
 
-        final OptionalInt highestEVer = cpu.highestRegisterValueEver();
-        assertTrue(highestEVer.isPresent());
-        assertEquals(10, highestEVer.getAsInt());
+        final var highestEVer = cpu.highestRegisterValueEver().orElseThrow();
+        assertEquals(10, highestEVer);
     }
 }

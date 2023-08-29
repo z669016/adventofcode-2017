@@ -1,9 +1,11 @@
 package com.putoet.day8;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.function.Predicate;
 
-public class CPU {
+class CPU {
     private enum Operator {
         EQUALS("=="),
         NOT_EQUALS("!="),
@@ -19,7 +21,7 @@ public class CPU {
         }
 
         static Operator of(String symbol) {
-            for (Operator operator : Operator.values()) {
+            for (var operator : Operator.values()) {
                 if (operator.symbol.equals(symbol))
                     return operator;
             }
@@ -35,38 +37,34 @@ public class CPU {
     }
 
     public OptionalInt highestRegisterValueEver() {
-        return regs.size() == 0 ? OptionalInt.empty() : OptionalInt.of(highestEver);
+        return regs.isEmpty() ? OptionalInt.empty() : OptionalInt.of(highestEver);
     }
 
-    public int getRegister(String name) {
-        assert name != null;
-
+    public int getRegister(@NotNull String name) {
         if (!regs.containsKey(name))
             setRegister(name, 0);
 
         return regs.get(name);
     }
 
-    public void incRegister(String name, int value, Predicate<CPU> predicate) {
+    public void incRegister(@NotNull String name, int value, @NotNull Predicate<CPU> predicate) {
         if (predicate.test(this))
             setRegister(name, getRegister(name) + value);
     }
 
-    public void decRegister(String name, int value, Predicate<CPU> predicate) {
+    public void decRegister(@NotNull String name, int value, @NotNull Predicate<CPU> predicate) {
         if (predicate.test(this))
             setRegister(name, getRegister(name) - value);
     }
 
-    private void setRegister(String name, int value) {
+    private void setRegister(@NotNull String name, int value) {
         if (value > highestEver)
             highestEver = value;
 
         regs.put(name, value);
     }
 
-    public static Predicate<CPU> compile(String predicate) {
-        assert predicate != null;
-
+    public static Predicate<CPU> compile(@NotNull String predicate) {
         final String[] parts = predicate.split(" ");
         if (parts.length != 3)
             throw new IllegalArgumentException("Invalid predicate '" + predicate + "'");
@@ -85,20 +83,19 @@ public class CPU {
         };
     }
 
-    public static CPU run(List<String> instructions) {
-        final CPU cpu = new CPU();
+    public static CPU run(@NotNull List<String> instructions) {
+        final var cpu = new CPU();
 
         instructions.forEach(instruction -> {
-            final String[] parts = instruction.split(" if ");
+            final var parts = instruction.split(" if ");
             if (parts.length != 2)
                 throw new IllegalArgumentException("Invalid instruction '" + instruction + "'");
 
-            final Predicate<CPU> predicate = compile(parts[1]);
-
-            final String[] actions = parts[0].split(" ");
-            final String register = actions[0].trim();
-            final String action = actions[1].trim();
-            final int value = Integer.parseInt(actions[2].trim());
+            final var predicate = compile(parts[1]);
+            final var actions = parts[0].split(" ");
+            final var register = actions[0].trim();
+            final var action = actions[1].trim();
+            final var value = Integer.parseInt(actions[2].trim());
 
             switch (action) {
                 case "inc" -> cpu.incRegister(register, value, predicate);

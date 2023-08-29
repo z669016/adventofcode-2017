@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Tower {
+class Tower {
     private final Map<String, String> tower = new HashMap<>();
     private final Map<String, Integer> weight = new HashMap<>();
 
