@@ -4,7 +4,7 @@ import com.putoet.grid.Point;
 
 import java.util.stream.IntStream;
 
-public class Sphere {
+class Sphere {
     public static int numbersOnRing(int ring) {
         assert ring >= 0;
 
@@ -32,7 +32,7 @@ public class Sphere {
     public static int ring(int number) {
         assert number > 0;
 
-        int ring = 0;
+        var ring = 0;
         while (number > maxOnRing(ring))
             ring++;
 
@@ -45,10 +45,10 @@ public class Sphere {
         if (number == 1)
             return Point.ORIGIN;
 
-        final int ring = ring(number);
-        final int offset = number - minOnRing(ring);
-        final int numbersOnRing = numbersOnRing(ring);
-        final int size = numbersOnRing / 4;
+        final var ring = ring(number);
+        final var offset = number - minOnRing(ring);
+        final var numbersOnRing = numbersOnRing(ring);
+        final var size = numbersOnRing / 4;
 
         final int block = block(offset, size);
 
@@ -62,7 +62,7 @@ public class Sphere {
     }
 
     private static int block(int offset, int size) {
-        int block = 0;
+        var block = 0;
         while (offset > ((block + 1) * size - 1))
             block++;
 
@@ -81,12 +81,12 @@ public class Sphere {
         if (point.equals(Point.ORIGIN))
             return 1;
 
-        final int ring = ring(point);
-        final int numbersOnRing = numbersOnRing(ring);
-        final int size = numbersOnRing / 4;
-        final int block = block(point, ring);
+        final var ring = ring(point);
+        final var numbersOnRing = numbersOnRing(ring);
+        final var size = numbersOnRing / 4;
+        final var block = block(point, ring);
 
-        final int offset = block * size + switch (block) {
+        final var offset = block * size + switch (block) {
             case 0 -> point.y() + ring - 1;
             case 1 -> Math.abs(ring - point.x() - 1);
             case 2 -> Math.abs(ring - point.y() - 1);
