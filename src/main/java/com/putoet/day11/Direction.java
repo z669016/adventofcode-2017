@@ -1,6 +1,6 @@
 package com.putoet.day11;
 
-public enum Direction {
+enum Direction {
     NORTH,
     NORTH_EAST,
     SOUTH_EAST,
