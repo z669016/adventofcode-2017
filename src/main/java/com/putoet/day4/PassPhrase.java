@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class PassPhrase {
     public static boolean isValidNoDoubles(@NotNull String phrase) {
