@@ -2,7 +2,7 @@ package com.putoet.day17;
 
 import java.util.List;
 
-public class SpinLockSimulation implements SpinLock {
+class SpinLockSimulation implements SpinLock {
     private final int value0 = 0;
     private int value1;
     private int size = 1;

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SpinLockImpl implements SpinLock {
+class SpinLockImpl implements SpinLock {
     private final List<Integer> lock = new ArrayList<>(List.of(0));
-    private int current = 0;
     private final int spinner;
+    private int current = 0;
 
     public SpinLockImpl(int spinner) {
         assert spinner > 0;

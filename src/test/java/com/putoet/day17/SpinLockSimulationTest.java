@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpinLockSimulationTest {
     @Test
     void test2017() {
-        final SpinLock spinLock = new SpinLockSimulation(3);
+        final var spinLock = new SpinLockSimulation(3);
 
         IntStream.range(1, 2018).forEach(spinLock::add);
         assertEquals(0, spinLock.list().get(0));
