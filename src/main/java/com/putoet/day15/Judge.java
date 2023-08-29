@@ -1,6 +1,6 @@
 package com.putoet.day15;
 
-public class Judge {
+class Judge {
     private int count = 0;
 
     void compare(long a, long b) {

@@ -1,14 +1,14 @@
 package com.putoet.day15;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Supplier;
 
-public class Generator implements Supplier<Long> {
-    private final String name;
+class Generator implements Supplier<Long> {
     private final long factor;
     private long lastNumber;
 
-    public Generator(String name, long factor, long startValue) {
-        this.name = name;
+    public Generator(long factor, long startValue) {
         this.factor = factor;
         this.lastNumber = startValue;
     }

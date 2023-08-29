@@ -14,8 +14,8 @@ class JudgeTest {
 
     @BeforeEach
     void setup() {
-        a = new Generator("A", 16807, 65);
-        b = new Generator("B", 48271, 8921);
+        a = new Generator(16807, 65);
+        b = new Generator(48271, 8921);
         judge = new Judge();
     }
 

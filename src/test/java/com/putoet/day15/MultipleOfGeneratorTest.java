@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MultipleOfGeneratorTest {
     @Test
     void get() {
-        final Generator a = new MultipleOfGenerator("A", 16807, 65, 4);
-        final Generator b = new MultipleOfGenerator("B", 48271, 8921, 8);
+        final var a = new MultipleOfGenerator(16807, 65, 4);
+        final var b = new MultipleOfGenerator(48271, 8921, 8);
 
         assertEquals(1352636452, a.get());
         assertEquals(1992081072, a.get());

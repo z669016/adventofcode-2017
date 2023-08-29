@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class GeneratorTest {
     @Test
     void get() {
-        final Generator a = new Generator("A", 16807, 65);
-        final Generator b = new Generator("B", 48271, 8921);
+        final var a = new Generator(16807, 65);
+        final var b = new Generator(48271, 8921);
 
         assertEquals(1092455, a.get());
         assertEquals(1181022009, a.get());
