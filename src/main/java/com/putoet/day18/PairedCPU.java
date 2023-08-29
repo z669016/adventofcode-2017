@@ -2,13 +2,11 @@ package com.putoet.day18;
 
 import java.util.function.Consumer;
 
-public class PairedCPU extends CPU {
-    private final int id;
+class PairedCPU extends CPU {
     private CPU other;
     private boolean waiting;
 
     public PairedCPU(int id) {
-        this.id = id;
         set("p", id);
     }
 
@@ -34,13 +32,14 @@ public class PairedCPU extends CPU {
         return (CPU c) -> {
             final PairedCPU cpu = (PairedCPU) c;
             if (cpu.other != null) {
-                final long value = cpu.get(operand(instruction, 1));
+                final var value = cpu.get(operand(instruction, 1));
                 cpu.played.add(value);
                 cpu.other.recovered.offer(value);
             }
         };
     }
 
+    @SuppressWarnings("DataFlowIssue")
     protected Consumer<CPU> rcv(String instruction) {
         return (CPU c) -> {
             final PairedCPU cpu = (PairedCPU) c;

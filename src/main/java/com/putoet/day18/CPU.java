@@ -1,16 +1,18 @@
 package com.putoet.day18;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.function.Consumer;
 
-public class CPU {
+class CPU {
     private final Map<String,Long> registers = new HashMap<>();
     protected final Queue<Long> recovered = new LinkedList<>();
     protected final List<Long> played = new ArrayList<>();
     protected int ip = 0;
 
-    public boolean play(List<Consumer<CPU>> program) {
-        boolean stuck = true;
+    public boolean play(@NotNull List<Consumer<CPU>> program) {
+        var stuck = true;
         while ((ip < program.size()) && play(program.get(ip))) {
             stuck = false;
         }
@@ -21,7 +23,7 @@ public class CPU {
         instruction.accept(this);
         ip++;
 
-        return recovered.size() == 0;
+        return recovered.isEmpty();
     }
 
     public List<Long> played() {
@@ -32,8 +34,8 @@ public class CPU {
         return List.copyOf(recovered);
     }
 
-    public long get(String operand) {
-        assert operand != null && operand.length() > 0;
+    public long get(@NotNull String operand) {
+        assert !operand.isEmpty();
 
         if (isRegister(operand))
             return registers.get(operand);
@@ -41,7 +43,7 @@ public class CPU {
         return Integer.parseInt(operand);
     }
 
-    public void set(String operand, long value) {
+    public void set(@NotNull String operand, long value) {
         if (!isRegister(operand))
             throw new IllegalArgumentException("Cannot set on a value '" + operand + "'");
 
@@ -49,16 +51,16 @@ public class CPU {
     }
 
     private boolean isRegister(String operand) {
-        assert operand != null && operand.length() > 0;
+        assert operand != null && !operand.isEmpty();
 
-        final boolean isRegister = operand.length() == 1 && Character.isAlphabetic(operand.charAt(0));
+        final var isRegister = operand.length() == 1 && Character.isAlphabetic(operand.charAt(0));
         if (isRegister && !registers.containsKey(operand))
             registers.put(operand, 0L);
 
         return isRegister;
     }
 
-    public List<Consumer<CPU>> compile(List<String> program) {
+    public List<Consumer<CPU>> compile(@NotNull List<String> program) {
         return program.stream()
                 .map(this::compile)
                 .toList();
@@ -80,7 +82,7 @@ public class CPU {
     protected String operand(String instruction, int idx) {
         assert instruction != null && idx > 0 && idx < 3;
 
-        final String[] parts = instruction.split(" ");
+        final var parts = instruction.split(" ");
         return parts[idx];
     }
 
@@ -125,7 +127,7 @@ public class CPU {
 
         return (CPU cpu) -> {
             if (cpu.get(operand(instruction, 1)) > 0) {
-                if (cpu.played.size() > 0)
+                if (!cpu.played.isEmpty())
                     cpu.recovered.add(cpu.played.get(cpu.played.size() - 1));
             }
         };
@@ -137,11 +139,11 @@ public class CPU {
 
         return (CPU cpu) -> {
             if (cpu.get(operand(instruction, 1)) > 0) {
-                final long offset = cpu.get(operand(instruction, 2));
+                final var offset = cpu.get(operand(instruction, 2));
                 if (cpu.ip + offset < 0)
                     throw new IllegalStateException("Invalid instruction '" + instruction + "', jumping outside the program.");
 
-                cpu.ip += offset - 1;
+                cpu.ip += (int) (offset - 1);
             }
         };
     }

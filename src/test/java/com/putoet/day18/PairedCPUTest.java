@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,8 +37,8 @@ class PairedCPUTest {
 
     @Test
     void snd() {
-        final Consumer<CPU> sndConstant = compiler.compile("snd 3");
-        final Consumer<CPU> sndRegister = compiler.compile("snd a");
+        final var sndConstant = compiler.compile("snd 3");
+        final var sndRegister = compiler.compile("snd a");
 
         assertEquals(0, cpu0.played.size());
         assertEquals(0, cpu0.recovered.size());
@@ -71,7 +70,7 @@ class PairedCPUTest {
 
     @Test
     void rcv() {
-        final Consumer<CPU> rcvA = compiler.compile("rcv a");
+        final var rcvA = compiler.compile("rcv a");
 
         assertFalse(cpu0.play(rcvA));
         assertFalse(cpu0.play(rcvA));
@@ -92,7 +91,7 @@ class PairedCPUTest {
 
     @Test
     void play() {
-        final List<String> instructions = List.of(
+        final var instructions = List.of(
                 "snd 1",
                 "snd 2",
                 "snd p",
@@ -101,7 +100,7 @@ class PairedCPUTest {
                 "rcv c",
                 "rcv d");
 
-        final List<Consumer<CPU>> program = cpu0.compile(instructions);
+        final var program = cpu0.compile(instructions);
 
         boolean prevRunCPU0, prevRunCPU1;
         boolean lastRunCPU0 = false, lastRunCPU1 = false;
