@@ -1,31 +1,33 @@
 package com.putoet.day7;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.List;
 import java.util.Optional;
 
 public class Day7 {
     public static void main(String[] args) {
-        final Tower tower = Tower.of(ResourceLines.list("/day7.txt"));
-        final List<String> roots = tower.roots();
+        final var tower = Timer.run(() -> {
+            final var t = Tower.of(ResourceLines.list("/day7.txt"));
+            final var root = t.root();
+            System.out.println("Roots found: " + root);
+            return t;
+        });
 
-        System.out.println("Roots found: " + roots);
+        Timer.run(() -> {
+            final var unbalancedProgram = tower.unbalancedChild(tower.root()).orElseThrow();
+            final var weight = tower.weight(unbalancedProgram);
+            final var totalWeight = tower.totalWeight(unbalancedProgram);
 
-        final Optional<String> unbalancedProgram = tower.unbalancedChild(roots.get(0));
-        if (unbalancedProgram.isPresent()) {
-            final int weight = tower.weight(unbalancedProgram.get());
-            final int totalWeight = tower.totalWeight(unbalancedProgram.get());
+            System.out.println("Unbalanced program is " + unbalancedProgram + " (" + weight + ") with total weight " + totalWeight);
 
-            System.out.println("Unbalanced program is " + unbalancedProgram.get() + " (" + weight + ") with total weight " + totalWeight);
-
-            final List<String> siblings = tower.siblings(unbalancedProgram.get());
-            if (siblings.size() > 0) {
-                final int siblingTotalWeight = tower.totalWeight(siblings.get(0));
+            final var siblings = tower.siblings(unbalancedProgram);
+            if (!siblings.isEmpty()) {
+                final var siblingTotalWeight = tower.totalWeight(siblings.get(0));
                 System.out.println("It's siblings have a total weight of " + siblingTotalWeight);
-
-                System.out.println(unbalancedProgram.get() + " should weigh " + (weight - (totalWeight - siblingTotalWeight)));
+                System.out.println(unbalancedProgram + " should weigh " + (weight - (totalWeight - siblingTotalWeight)));
             }
-        }
+        });
     }
 }
