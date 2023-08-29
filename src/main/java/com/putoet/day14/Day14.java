@@ -1,11 +1,12 @@
 package com.putoet.day14;
 
+import com.putoet.utils.Timer;
+
 public class Day14 {
     public static void main(String[] args) {
-        final String inout = "oundnydw";
-        final DiskGrid grid = DiskGrid.of(inout);
+        final var grid = DiskGrid.of("oundnydw");
 
-        System.out.println("Number of used blocks is " + grid.usedBlocks());
-        System.out.println("Number os regions is " + grid.regions());
+        Timer.run(() -> System.out.println("Number of used blocks is " + grid.usedBlocks()));
+        Timer.run(() -> System.out.println("Number os regions is " + grid.regions()));
     }
 }
