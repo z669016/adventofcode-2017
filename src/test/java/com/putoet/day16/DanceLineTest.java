@@ -18,7 +18,6 @@ class DanceLineTest {
 
     @Test
     void create() {
-        assertThrows(AssertionError.class, () -> new DanceLine(null));
         assertThrows(AssertionError.class, () -> new DanceLine(""));
     }
 
@@ -32,7 +31,7 @@ class DanceLineTest {
 
     @Test
     void dance() {
-        final List<String> moves = List.of(
+        final var moves = List.of(
                 "s1",
                 "x3/4",
                 "pe/b"

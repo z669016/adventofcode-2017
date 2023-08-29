@@ -1,19 +1,19 @@
 package com.putoet.day16;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.List;
 
-public class DanceLine {
+class DanceLine {
     private final char[] line;
 
-    public DanceLine(String line) {
-        assert line != null && line.length() > 0;
+    public DanceLine(@NotNull String line) {
+        assert !line.isEmpty();
         this.line = line.toCharArray();
     }
 
-    public void dance(List<String> moves) {
-        assert moves != null;
-
+    public void dance(@NotNull List<String> moves) {
         moves.forEach(move -> {
             switch (move.charAt(0)) {
                 case 's' -> spin(moveSize(move));
@@ -67,8 +67,8 @@ public class DanceLine {
     }
 
     public DanceLine partner(char a, char b) {
-        final int pA = indexOf(line, a);
-        final int pB = indexOf(line, b);
+        final var pA = indexOf(line, a);
+        final var pB = indexOf(line, b);
 
         assert pA != -1;
         assert pB != -1;
@@ -84,21 +84,23 @@ public class DanceLine {
     }
 
     private static void spin(char[] line, int size) {
-        final char[] temp = Arrays.copyOfRange(line, line.length - size, line.length);
+        final var temp = Arrays.copyOfRange(line, line.length - size, line.length);
 
-        for (int idx = line.length - 1; idx >= size; idx--)
+        for (var idx = line.length - 1; idx >= size; idx--)
             line[idx] = line[idx - size];
-        if (size >= 0) System.arraycopy(temp, 0, line, 0, size);
+
+        if (size >= 0)
+            System.arraycopy(temp, 0, line, 0, size);
     }
 
     private static void exchange(char[] line, int a, int b) {
-        final char temp = line[a];
+        final var temp = line[a];
         line[a] = line[b];
         line[b] = temp;
     }
 
     private static int indexOf(char[] line, char c) {
-        for (int idx = 0; idx < line.length; idx++)
+        for (var idx = 0; idx < line.length; idx++)
             if (line[idx] == c) return idx;
 
         return -1;
