@@ -1,7 +1,5 @@
 package com.putoet.day15;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Supplier;
 
 class Generator implements Supplier<Long> {
