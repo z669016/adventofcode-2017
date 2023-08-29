@@ -1,6 +1,7 @@
 package com.putoet.day3;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.IntStream;
 
@@ -77,7 +78,7 @@ class Sphere {
         throw new IllegalStateException("Cannot determine block for point " + point + " on ring " + ring);
     }
 
-    public static int number(Point point) {
+    public static int number(@NotNull Point point) {
         if (point.equals(Point.ORIGIN))
             return 1;
 

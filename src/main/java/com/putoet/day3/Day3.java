@@ -1,6 +1,5 @@
 package com.putoet.day3;
 
-import com.putoet.grid.Point;
 import com.putoet.utils.Timer;
 
 import java.util.ArrayList;
