@@ -2,7 +2,7 @@ package com.putoet.day9;
 
 import java.util.Iterator;
 
-public class DataTokenizer implements Iterator<DataToken> {
+class DataTokenizer implements Iterator<DataToken> {
     private final char[] data;
     private int offset = 0;
 

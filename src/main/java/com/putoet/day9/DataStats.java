@@ -1,10 +1,10 @@
 package com.putoet.day9;
 
-public record DataStats(int groupScore, int garbageLength, int excludedCounter) {
+record DataStats(int groupScore, int garbageLength, int excludedCounter) {
     public static DataStats parse(String input) {
         assert input != null;
 
-        final DataTokenizer data = new DataTokenizer(input);
+        final var data = new DataTokenizer(input);
 
         StringBuilder garbage = null;
         int garbageLevel = 0;
@@ -15,9 +15,10 @@ public record DataStats(int groupScore, int garbageLength, int excludedCounter) 
         int groupScore = 0;
 
         while (data.hasNext()) {
-            final DataToken token = data.next();
+            final var token = data.next();
             if (garbageLevel > 0) {
-                assert garbage != null;
+                if (garbage == null)
+                    throw new IllegalStateException("Garbage cannot be null!");
 
                 garbage.append(token.data());
             }
@@ -27,37 +28,31 @@ public record DataStats(int groupScore, int garbageLength, int excludedCounter) 
                 excludeNext = false;
             } else {
                 switch (token.type()) {
-                    case EXCLUDE_NEXT:
-                        excludeNext = true;
-                        break;
-
-                    case OPEN_GARBAGE:
+                    case EXCLUDE_NEXT -> excludeNext = true;
+                    case OPEN_GARBAGE -> {
                         if (garbageLevel == 0) {
                             garbage = new StringBuilder();
                             garbage.append(token.data());
                             garbageLevel = 1;
                         }
-                        break;
-
-                    case CLOSE_GARBAGE:
+                    }
+                    case CLOSE_GARBAGE -> {
                         if (garbageLevel > 0) {
                             garbageLength += garbage.length() - 2;
                             garbage = null;
                             garbageLevel = 0;
                         }
-                        break;
-
-                        case OPEN_GROUP:
-                            if (garbageLevel == 0)
-                                groupLevel++;
-                            break;
-
-                        case CLOSE_GROUP:
-                            if (garbageLevel == 0) {
-                                groupScore += groupLevel;
-                                groupLevel--;
-                            }
-                            break;
+                    }
+                    case OPEN_GROUP -> {
+                        if (garbageLevel == 0)
+                            groupLevel++;
+                    }
+                    case CLOSE_GROUP -> {
+                        if (garbageLevel == 0) {
+                            groupScore += groupLevel;
+                            groupLevel--;
+                        }
+                    }
                 }
             }
         }

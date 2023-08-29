@@ -1,6 +1,6 @@
 package com.putoet.day9;
 
-public record DataToken(Type type, char data) {
+record DataToken(Type type, char data) {
     public enum Type {
         OPEN_GROUP,
         CLOSE_GROUP,
