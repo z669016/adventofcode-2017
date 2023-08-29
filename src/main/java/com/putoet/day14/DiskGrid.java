@@ -1,7 +1,7 @@
 package com.putoet.day14;
 
 import com.putoet.grid.Point;
-import utilities.KnotHash;
+import com.putoet.day10.KnotHash;
 
 import java.util.*;
 import java.util.stream.Collectors;

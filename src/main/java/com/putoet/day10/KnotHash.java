@@ -1,4 +1,6 @@
-package utilities;
+package com.putoet.day10;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,13 +14,12 @@ public class KnotHash {
 
     public KnotHash() {
         list = new int[256];
-        for (int idx = 0; idx < list.length; idx++)
+        for (var idx = 0; idx < list.length; idx++)
             list[idx] = idx;
     }
 
     public KnotHash(int[] list) {
-        this.list = new int[list.length];
-        System.arraycopy(list, 0, this.list, 0, list.length);
+        this.list = Arrays.copyOf(list, list.length);
     }
 
     public void reverse(int size) {
@@ -31,12 +32,12 @@ public class KnotHash {
     }
 
     private static void reverse(int[] list, int current, int size) {
-        final int[] reversed = new int[size];
+        final var reversed = new int[size];
 
-        for (int idx = 0; idx < size; idx++)
+        for (var idx = 0; idx < size; idx++)
             reversed[size - idx - 1] = list[(current + idx) % list.length];
 
-        for (int idx = 0; idx < size; idx++)
+        for (var idx = 0; idx < size; idx++)
             list[(current + idx) % list.length] = reversed[idx];
     }
 
@@ -56,8 +57,8 @@ public class KnotHash {
     }
 
     private static List<Integer> sparseHash(List<Integer> input) {
-        final KnotHash knotHash = new KnotHash();
-        for (int i = 0; i < 64; i++) {
+        final var knotHash = new KnotHash();
+        for (var i = 0; i < 64; i++) {
             input.forEach(knotHash::reverse);
         }
 
@@ -67,9 +68,8 @@ public class KnotHash {
     private static List<Integer> denseHash(List<Integer> hash) {
         assert hash.size() % 16 == 0;
 
-        final List<Integer> denseHash = new ArrayList<>();
-
-        for (int block = 0; block < hash.size() / 16; block++) {
+        final var denseHash = new ArrayList<Integer>();
+        for (var block = 0; block < hash.size() / 16; block++) {
             denseHash.add(hash.get(block * 16) ^
                     hash.get(block * 16 + 1) ^
                     hash.get(block * 16 + 2) ^
@@ -92,22 +92,17 @@ public class KnotHash {
     }
 
     private static String hexadecimal(List<Integer> list) {
-        final StringBuffer sb = new StringBuffer();
-        list.forEach(i -> sb.append(String.format("%02x", i)));
-        return sb.toString();
+        return list.stream().map(i -> String.format("%02x", i)).collect(Collectors.joining());
     }
 
-    public static List<Integer> createKey(String line) {
-        assert line != null;
-
-        final List<Integer> list = new ArrayList<>();
-        line.chars().forEach(list::add);
+    public static List<Integer> createKey(@NotNull String line) {
+        final var list = new ArrayList<>(line.chars().boxed().toList());
         list.addAll(List.of(17, 31, 73, 47, 23));
 
         return list;
     }
 
-    public static String hash(List<Integer> input) {
+    public static String hash(@NotNull List<Integer> input) {
         return hexadecimal(denseHash(sparseHash(input)));
     }
 }

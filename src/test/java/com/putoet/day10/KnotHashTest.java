@@ -1,4 +1,4 @@
-package utilities;
+package com.putoet.day10;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class KnotHashTest {
     @Test
     void create() {
-        final KnotHash knotHash = new KnotHash();
-        final List<Integer> list = knotHash.asList();
+        final var knotHash = new KnotHash();
+        final var list = knotHash.asList();
 
         assertEquals(256, list.size());
         assertEquals(0, list.get(0));
@@ -20,7 +20,7 @@ class KnotHashTest {
 
     @Test
     void reverse() {
-        final KnotHash list = new KnotHash(new int[] {0, 1, 2, 3, 4});
+        final var list = new KnotHash(new int[] {0, 1, 2, 3, 4});
 
         list.reverse(3);
         assertEquals(List.of(2, 1, 0, 3, 4), list.asList());
@@ -47,7 +47,7 @@ class KnotHashTest {
 
     @Test
     void input() {
-        final List<Integer> list = KnotHash.createKey("1,2,3");
+        final var list = KnotHash.createKey("1,2,3");
         assertEquals(List.of(49,44,50,44,51,17,31,73,47,23), list);
     }
 }
