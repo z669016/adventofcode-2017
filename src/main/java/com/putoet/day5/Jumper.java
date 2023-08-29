@@ -1,6 +1,8 @@
 package com.putoet.day5;
 
-public class Jumper {
+import java.util.Arrays;
+
+class Jumper {
     private final int[] jumps;
     private final boolean decrease;
 
@@ -11,17 +13,17 @@ public class Jumper {
     public Jumper(int[] jumps, boolean decrease) {
         assert jumps != null && jumps.length > 0;
 
-        this.jumps = jumps;
+        this.jumps = Arrays.copyOf(jumps, jumps.length);
         this.decrease = decrease;
     }
 
     public int run() {
-        int ip = 0;
-        int count = 0;
+        var ip = 0;
+        var count = 0;
 
         while (ip >= 0 && ip < jumps.length) {
-            final int current = ip;
-            final int offset = jumps[current];
+            final var current = ip;
+            final var offset = jumps[current];
 
             ip += offset;
             jumps[current] = decrease ? decrease(offset) : increase(offset);
