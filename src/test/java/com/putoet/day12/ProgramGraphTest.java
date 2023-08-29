@@ -4,7 +4,6 @@ import com.putoet.resources.ResourceLines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,13 +13,13 @@ class ProgramGraphTest {
 
     @BeforeEach
     void setup() {
-        final List<String> lines = ResourceLines.list("/day12.txt");
+        final var lines = ResourceLines.list("/day12.txt");
         graph = ProgramGraph.of(lines);
     }
 
     @Test
     void group() {
-        final Set<Program> group = graph.group(new Program("0"));
+        final var group = graph.group(new Program("0"));
         assertEquals(Set.of(
                 new Program("0"),
                 new Program("2"),
@@ -35,7 +34,7 @@ class ProgramGraphTest {
 
     @Test
     void groups() {
-        final Set<Set<Program>> groups = graph.groups();
+        final var groups = graph.groups();
         assertEquals(2, groups.size());
     }
 }

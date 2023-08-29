@@ -4,15 +4,15 @@ import com.putoet.graph.UnweightedGraph;
 
 import java.util.*;
 
-public class ProgramGraph extends UnweightedGraph<Program> {
+class ProgramGraph extends UnweightedGraph<Program> {
     public static ProgramGraph of(List<String> lines) {
-        final ProgramGraph graph = new ProgramGraph();
+        final var graph = new ProgramGraph();
         lines.forEach(line -> {
-            final Program program = program(line);
+            final var program = program(line);
             if (!graph.contains(program))
                 graph.addVertex(program);
 
-            final List<Program> connects = connects(line);
+            final var connects = connects(line);
             connects.forEach(connecting -> {
                 if (!graph.contains(connecting))
                     graph.addVertex(connecting);
@@ -26,15 +26,14 @@ public class ProgramGraph extends UnweightedGraph<Program> {
     }
 
     private static Program program(String line) {
-        assert line != null;
-
         return new Program(defSplit(line)[0]);
     }
 
     private static String[] defSplit(String line) {
-        final String[] parts = line.split(" <-> ");
+        final var parts = line.split(" <-> ");
         if (parts.length != 2)
             throw new IllegalArgumentException("Invalid program dependency line '" + line + "'");
+
         return parts;
     }
 
@@ -49,14 +48,14 @@ public class ProgramGraph extends UnweightedGraph<Program> {
     }
 
     public Set<Program> group(Program program) {
-        final Set<Program> visited = new HashSet<>();
-        final Set<Program> group = new HashSet<>();
+        final var visited = new HashSet<Program>();
+        final var group = new HashSet<Program>();
 
-        final Queue<Program> queue = new LinkedList<>();
+        final var queue = new LinkedList<Program>();
         queue.offer(program);
 
         while(!queue.isEmpty()) {
-            final Program p = queue.poll();
+            final var p = queue.poll();
             group.add(p);
             visited.add(p);
 
@@ -70,14 +69,13 @@ public class ProgramGraph extends UnweightedGraph<Program> {
     }
 
     public Set<Set<Program>> groups() {
-        final Set<Program> visited = new HashSet<>();
-        final Set<Set<Program>> groups = new HashSet<>();
+        final var visited = new HashSet<Program>();
+        final var groups = new HashSet<Set<Program>>();
 
-        for (Program program : vertices) {
+        for (var program : vertices) {
             if (!visited.contains(program)) {
-                final Set<Program> group = group(program);
+                final var group = group(program);
                 visited.addAll(group);
-
                 groups.add(group);
             }
         }
