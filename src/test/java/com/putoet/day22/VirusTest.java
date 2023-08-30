@@ -12,14 +12,14 @@ class VirusTest {
 
     @Test
     void burst() {
-        char[][] grid = GridUtils.of(List.of(
+        var grid = GridUtils.of(List.of(
                 "..#",
                 "#..",
                 "..."
         ));
 
-        final Virus virus = new Virus(Point.of(1, 1));
-        for (int i = 0; i < 10_000; i++) {
+        final var virus = new Virus(Point.of(1, 1));
+        for (var i = 0; i < 10_000; i++) {
             if (i == 7)
                 assertEquals(5, virus.burstInfectedCount());
             if (i == 70)

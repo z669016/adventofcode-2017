@@ -1,12 +1,13 @@
 package com.putoet.day22;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
-public class SmarterVirus extends Virus {
+class SmarterVirus extends Virus {
     public static final char WEAKENED = 'W';
     public static final char FLAGGED = 'F';
 
-    public SmarterVirus(Point start) {
+    public SmarterVirus(@NotNull Point start) {
         super(start);
     }
 

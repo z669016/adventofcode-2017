@@ -2,8 +2,9 @@ package com.putoet.day22;
 
 import com.putoet.grid.Point;
 import com.putoet.grid.GridUtils;
+import org.jetbrains.annotations.NotNull;
 
-public class Virus {
+class Virus {
     public static final char INFECTED = '#';
     public static final char CLEAN = '.';
 
@@ -11,14 +12,17 @@ public class Virus {
     private int burstInfectedCount = 0;
     private Point position;
 
-    public Virus(Point start) {
+    public Virus(@NotNull Point start) {
         this.position = start;
     }
 
     public Direction direction() { return direction; }
+
     public int burstInfectedCount() { return burstInfectedCount; }
 
     public char[][] burst(char[][] grid) {
+        assert grid != null;
+
         grid = checkPosition(grid);
 
         direction = direction(currentNode(grid));
@@ -29,6 +33,8 @@ public class Virus {
     }
 
     protected void affectCurrentPosition(char[][] grid) {
+        assert grid != null;
+
         if (currentNode(grid) == INFECTED)
             clean(grid);
         else
@@ -36,11 +42,15 @@ public class Virus {
     }
 
     protected void infect(char[][] grid) {
+        assert grid != null;
+
         currentNode(grid, INFECTED);
         burstInfectedCount++;
     }
 
     protected void clean(char[][] grid) {
+        assert grid != null;
+
         currentNode(grid, CLEAN);
     }
 
@@ -67,10 +77,14 @@ public class Virus {
     }
 
     public char currentNode(char[][] grid) {
+        assert grid != null;
+
         return grid[position.y()][position.x()];
     }
 
     public void currentNode(char[][] grid, char state) {
+        assert grid != null;
+
         grid[position.y()][position.x()] = state;
     }
 }
