@@ -1,20 +1,20 @@
 package com.putoet.day23;
 
 import com.putoet.resources.ResourceLines;
-
-import java.util.List;
-import java.util.function.Consumer;
+import com.putoet.utils.Timer;
 
 public class Day23 {
     public static void main(String[] args) {
-        final Compiler compiler = new Compiler();
-        final List<Consumer<CPU>> program = compiler.compile(ResourceLines.list("/day23.txt"));
+        Timer.run(() -> {
+            final var compiler = new Compiler();
+            final var program = compiler.compile(ResourceLines.list("/day23.txt"));
 
-        CPU cpu = new CPU();
-        cpu.run(program);
-        System.out.println("Instruction mul was called " + compiler.mulCalls() + " times");
+            CPU cpu = new CPU();
+            cpu.run(program);
+            System.out.println("Instruction mul was called " + compiler.mulCalls() + " times");
+        });
 
-        System.out.println("The value of register h is " + part2());
+        Timer.run(() -> System.out.println("The value of register h is " + part2()));
     }
 
     public static int part2() {

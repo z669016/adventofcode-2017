@@ -3,8 +3,6 @@ package com.putoet.day23;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Consumer;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompilerTest {
@@ -21,7 +19,7 @@ class CompilerTest {
 
     @Test
     void set() {
-        Consumer<CPU> instruction = Compiler.COMPILER.compile("set c 9");
+        var instruction = Compiler.COMPILER.compile("set c 9");
         cpu.run(instruction);
         assertEquals(9, cpu.get(CPU.REG_C));
 
@@ -32,7 +30,7 @@ class CompilerTest {
 
     @Test
     void sub() {
-        Consumer<CPU> instruction = Compiler.COMPILER.compile("sub a 1");
+        var instruction = Compiler.COMPILER.compile("sub a 1");
         cpu.run(instruction);
         assertEquals(INIT_A - 1, cpu.get(CPU.REG_A));
 
@@ -43,7 +41,7 @@ class CompilerTest {
 
     @Test
     void mul() {
-        Consumer<CPU> instruction = Compiler.COMPILER.compile("mul a 2");
+        var instruction = Compiler.COMPILER.compile("mul a 2");
         cpu.run(instruction);
         assertEquals(INIT_A * 2, cpu.get(CPU.REG_A));
 
@@ -54,7 +52,7 @@ class CompilerTest {
 
     @Test
     void jnz() {
-        Consumer<CPU> instruction = Compiler.COMPILER.compile("jnz b 11");
+        var instruction = Compiler.COMPILER.compile("jnz b 11");
         cpu.run(instruction);
         assertEquals(0, cpu.ip());
 
