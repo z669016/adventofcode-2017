@@ -1,6 +1,7 @@
 package com.putoet.day20;
 
 import com.putoet.resources.ResourceLines;
+import com.putoet.utils.Timer;
 
 import java.util.Comparator;
 import java.util.List;
@@ -10,22 +11,27 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class Day20 {
     public static void main(String[] args) {
-        final List<String> lines = ResourceLines.list("/day20.txt");
-        final List<Particle> particles = IntStream.range(0, lines.size())
-                .mapToObj(i -> Particle.of(i, lines.get(i)))
-                .sorted(Comparator.naturalOrder())
-                .toList();
+        final var particles = Timer.run(() -> {
+            final var lines = ResourceLines.list("/day20.txt");
+            var list = IntStream.range(0, lines.size())
+                    .mapToObj(i -> Particle.of(i, lines.get(i)))
+                    .sorted(Comparator.naturalOrder())
+                    .toList();
 
-        System.out.println("Closest particle (on the long run) will me " + particles.get(0));
+            System.out.println("Closest particle (on the long run) will be " + list.get(0));
+            return list;
+        });
 
-        final List<Particle> distinct = removeColliding(particles);
-        System.out.println("There are " + distinct.size() + " non-colliding particles");
+        Timer.run(() -> {
+            final List<Particle> distinct = removeColliding(particles);
+            System.out.println("There are " + distinct.size() + " non-colliding particles");
+        });
     }
 
     public static List<Particle> removeColliding(List<Particle> particles) {
-        int size = particles.size();
-        int unchanged = 0;
-        List<Particle> next = particles;
+        var size = particles.size();
+        var unchanged = 0;
+        var next = particles;
 
         while (unchanged < 1000) {
             next = next.stream()
