@@ -23,12 +23,12 @@ public class Day20 {
         });
 
         Timer.run(() -> {
-            final List<Particle> distinct = removeColliding(particles);
+            final var distinct = removeColliding(particles);
             System.out.println("There are " + distinct.size() + " non-colliding particles");
         });
     }
 
-    public static List<Particle> removeColliding(List<Particle> particles) {
+    static List<Particle> removeColliding(List<Particle> particles) {
         var size = particles.size();
         var unchanged = 0;
         var next = particles;
