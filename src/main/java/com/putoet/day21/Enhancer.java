@@ -1,11 +1,12 @@
 package com.putoet.day21;
 
 import com.putoet.grid.GridUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Enhancer {
+class Enhancer {
     public static final char[][] INITIAL_GRID = string2grid(".#./..#/###");
     public static final String SEPARATOR = "/";
 
@@ -16,39 +17,44 @@ public class Enhancer {
     }
 
     public char[][] transform(char[][] fromGrid) {
-        final int fromSize = gridSize(fromGrid);
-        final int blocks = fromGrid.length / fromSize;
-        final int toSize = fromSize == 2 ? 3 : 4;
-        final char[][] toGrid = new char[blocks * toSize][blocks * toSize];
+        assert fromGrid != null;
 
-        for (int y = 0; y < blocks; y++)
-            for (int x = 0; x < blocks; x++)
+        final var fromSize = gridSize(fromGrid);
+        final var blocks = fromGrid.length / fromSize;
+        final var toSize = fromSize == 2 ? 3 : 4;
+        final var toGrid = new char[blocks * toSize][blocks * toSize];
+
+        for (var y = 0; y < blocks; y++)
+            for (var x = 0; x < blocks; x++)
                 transform(fromGrid, y * fromSize, x * fromSize, toGrid);
 
         return toGrid;
     }
 
     public void transform(char[][] fromGrid, int fromYOffset, int fromXOffset, char[][] toGrid) {
-        final String key = grid2String(fromGrid, fromYOffset, fromXOffset);
-        final char[][] transformation = selectRule(key);
+        assert fromGrid != null;
+        assert toGrid != null;
 
-        final int fromSize = gridSize(fromGrid);
-        final int yOffset = fromYOffset / fromSize;
-        final int xOffset = fromXOffset / fromSize;
-        final int toSize = transformation.length;
-        final int toYOffset = yOffset * toSize;
-        final int toXOffset = xOffset * toSize;
+        final var key = grid2String(fromGrid, fromYOffset, fromXOffset);
+        final var transformation = selectRule(key);
 
-        for (int y = 0; y < toSize; y++)
+        final var fromSize = gridSize(fromGrid);
+        final var yOffset = fromYOffset / fromSize;
+        final var xOffset = fromXOffset / fromSize;
+        final var toSize = transformation.length;
+        final var toYOffset = yOffset * toSize;
+        final var toXOffset = xOffset * toSize;
+
+        for (var y = 0; y < toSize; y++)
             System.arraycopy(transformation[y], 0, toGrid[y + toYOffset], toXOffset, toSize);
     }
 
     private char[][] selectRule(String grid) {
-        final char[][] rotation = selectRotationRule(grid);
+        final var rotation = selectRotationRule(grid);
         if (rotation != null)
             return rotation;
 
-        final char[][] flip = selectFlipRule(grid);
+        final var flip = selectFlipRule(grid);
         if (flip != null)
             return flip;
 
@@ -56,7 +62,7 @@ public class Enhancer {
     }
 
     private char[][] selectRotationRule(String grid) {
-        for (int rotation = 0; rotation < 4; rotation++) {
+        for (var rotation = 0; rotation < 4; rotation++) {
             grid = rotate(grid);
             if (rules.containsKey(grid))
                 return rules.get(grid);
@@ -66,8 +72,8 @@ public class Enhancer {
     }
 
     private char[][] selectFlipRule(String grid) {
-        String flipped = horizontalFlip(grid);
-        char[][] rotatedFlipped = selectRotationRule(flipped);
+        var flipped = horizontalFlip(grid);
+        var rotatedFlipped = selectRotationRule(flipped);
         if (rotatedFlipped != null)
             return rotatedFlipped;
 
@@ -87,7 +93,7 @@ public class Enhancer {
     }
 
     public static String horizontalFlip(String grid) {
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
 
         // 0 1 /   --> 1 0 /
         // 3 4         4 3
@@ -121,7 +127,7 @@ public class Enhancer {
     }
 
     public static String verticalFlip(String grid) {
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
 
         // 0 1 /   --> 3 4 /
         // 3 4         0 1
@@ -155,7 +161,7 @@ public class Enhancer {
     }
 
     public static String rotate(String grid) {
-        final StringBuilder sb = new StringBuilder();
+        final var sb = new StringBuilder();
 
         // 0 1 /   --> 3 0 /
         // 3 4         4 1
@@ -193,6 +199,8 @@ public class Enhancer {
     }
 
     public static String grid2String(char[][] grid) {
+        assert grid != null;
+
         return Arrays.stream(grid)
                 .sequential()
                 .map(String::valueOf)
@@ -200,10 +208,12 @@ public class Enhancer {
     }
 
     public static String grid2String(char[][] grid, int yOffset, int xOffset) {
-        final int size = gridSize(grid);
-        final StringBuilder sb = new StringBuilder();
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
+        assert grid != null;
+
+        final var size = gridSize(grid);
+        final var sb = new StringBuilder();
+        for (var y = 0; y < size; y++) {
+            for (var x = 0; x < size; x++) {
                 sb.append(grid[y + yOffset][x + xOffset]);
             }
             if (y < size - 1)
@@ -213,19 +223,17 @@ public class Enhancer {
         return sb.toString();
     }
 
-    public static char[][] string2grid(String line) {
+    public static char[][] string2grid(@NotNull String line) {
         return Arrays.stream(line.split(SEPARATOR))
                 .sequential()
                 .map(String::toCharArray)
                 .toArray(char[][]::new);
     }
 
-    public static Enhancer of(List<String> lines) {
-        assert lines != null;
-
-        final Enhancer enhancer = new Enhancer();
+    public static Enhancer of(@NotNull List<String> lines) {
+        final var enhancer = new Enhancer();
         lines.forEach(line -> {
-            final String[] parts = line.split(" => ");
+            final var parts = line.split(" => ");
             if (parts.length != 2)
                 System.out.println("Invalid enhancement rule '" + line + "' will be ignored");
             else
@@ -236,6 +244,8 @@ public class Enhancer {
     }
 
     public static long activePixels(char[][] grid) {
+        assert grid != null;
+
         return GridUtils.count(grid, '#');
     }
 }

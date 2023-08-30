@@ -37,9 +37,9 @@ class EnhancerTest {
 
     @Test
     void transform() {
-        final Enhancer enhancer = Enhancer.of(ResourceLines.list("/day21.txt"));
+        final var enhancer = Enhancer.of(ResourceLines.list("/day21.txt"));
 
-        char[][] grid = enhancer.transform(GRID3);
+        var grid = enhancer.transform(GRID3);
         assertEquals("#..#/..../..../#..#", Enhancer.grid2String(grid));
 
         grid = enhancer.transform(grid);
@@ -49,11 +49,12 @@ class EnhancerTest {
 
     @Test
     void rotations() {
-        String grid = LINE3;
+        var grid = LINE3;
         System.out.println(grid);
+
         Arrays.stream(grid.split("/")).forEach(System.out::println);
         System.out.println();
-        for (int r = 0; r < 3; r++) {
+        for (var r = 0; r < 3; r++) {
             grid = Enhancer.rotate(grid);
             System.out.println(grid);
             Arrays.stream(grid.split("/")).forEach(System.out::println);
@@ -63,12 +64,13 @@ class EnhancerTest {
 
     @Test
     void flips() {
-        String grid = LINE3;
+        var grid = LINE3;
         System.out.println(grid);
+
         Arrays.stream(grid.split("/")).forEach(System.out::println);
         System.out.println();
 
-        String flipped = Enhancer.horizontalFlip(grid);
+        var flipped = Enhancer.horizontalFlip(grid);
         System.out.println(flipped);
         Arrays.stream(flipped.split("/")).forEach(System.out::println);
         System.out.println();
