@@ -9,11 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class Day24Test {
     @Test
     void bridges() {
-        final List<Bridge> bridges = Day24.bridges();
-        bridges.forEach(System.out::println);
-
-        final int strongest = bridges.stream().mapToInt(Bridge::strength).max().orElseThrow();
-
+        final var bridges = Day24.bridges();
+        final var strongest = bridges.stream().mapToInt(Bridge::strength).max().orElseThrow();
         assertEquals(31, strongest);
     }
 }

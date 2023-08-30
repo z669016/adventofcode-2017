@@ -20,23 +20,21 @@ class BridgeTest {
 
     @Test
     void bridge() {
-        final Bridge b1 = new Bridge(starters.get(0), components);
+        final var b1 = new Bridge(starters.get(0), components);
         assertEquals(1, b1.length());
         assertEquals(2, b1.strength());
 
-        final Bridge b2 = new Bridge(starters.get(1), components);
+        final var b2 = new Bridge(starters.get(1), components);
         assertEquals(1, b2.length());
         assertEquals(1, b2.strength());
     }
 
     @Test
     void options() {
-        final Bridge b1 = new Bridge(starters.get(0), components);
-        final List<Bridge> options = b1.options();
+        final var b1 = new Bridge(starters.get(0), components);
+        final var options = b1.options();
         assertEquals(2, options.size());
         assertEquals(6, options.get(0).strength());
         assertEquals(2, options.get(0).length());
-
-        System.out.println(options);
     }
 }

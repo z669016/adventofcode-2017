@@ -1,15 +1,17 @@
 package com.putoet.day24;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Bridge {
+class Bridge {
     private final List<Component> list = new ArrayList<>();
     private Component last;
     private final Components components;
 
-    public Bridge(Component start, Components components) {
+    public Bridge(@NotNull Component start, @NotNull Components components) {
         if (start.one() != 0)
             start.reverse();
         if (start.one() != 0)
@@ -30,7 +32,7 @@ public class Bridge {
     private Bridge add(Component component) {
         if (component.one() != last.two()) component.reverse();
 
-        final Bridge b = new Bridge(this);
+        final var b = new Bridge(this);
 
         b.list.add(component);
         b.components.use(component);
@@ -40,8 +42,8 @@ public class Bridge {
     }
 
     public List<Bridge> options() {
-        final List<Component> options = components.forPort(list.get(list.size() - 1).two());
-        if (options.size() == 0)
+        final var options = components.forPort(list.get(list.size() - 1).two());
+        if (options.isEmpty())
             return List.of();
 
         return options.stream().map(this::add).collect(Collectors.toList());

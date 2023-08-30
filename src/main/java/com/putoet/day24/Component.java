@@ -2,7 +2,7 @@ package com.putoet.day24;
 
 import java.util.Objects;
 
-public class Component {
+class Component {
     public final int id;
     private int portOne, portTwo;
 

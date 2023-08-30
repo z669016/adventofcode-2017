@@ -1,13 +1,15 @@
 package com.putoet.day24;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Components {
+class Components {
     private final List<Component> list;
 
-    public Components(Components components) {
+    public Components(@NotNull Components components) {
         this.list = new ArrayList<>();
         components.list.forEach(c -> list.add(new Component(c)));
     }
@@ -16,9 +18,9 @@ public class Components {
         this.list = new ArrayList<>(list);
     }
 
-    public static Components of(List<String> lines) {
-        final List<Component> list = IntStream.range(0, lines.size()).mapToObj(id -> {
-                    final String[] ports = lines.get(id).split("/");
+    public static Components of(@NotNull List<String> lines) {
+        final var list = IntStream.range(0, lines.size()).mapToObj(id -> {
+                    final var ports = lines.get(id).split("/");
                     return new Component(id, Integer.parseInt(ports[0]), Integer.parseInt(ports[1]));
                 })
                 .toList();
