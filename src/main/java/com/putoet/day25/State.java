@@ -1,8 +1,10 @@
 package com.putoet.day25;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.Function;
 
-public class State implements Function<Tape,String> {
+class State implements Function<Tape,String> {
     private final String name;
     private final Function<Tape,String> onZero;
     private final Function<Tape,String> onOne;
@@ -15,8 +17,8 @@ public class State implements Function<Tape,String> {
 
     public String name() { return name; }
 
-    public String apply(Tape tape) {
-        final int bit = tape.read();
+    public String apply(@NotNull Tape tape) {
+        final var bit = tape.read();
         return bit == 0 ? onZero.apply(tape) : onOne.apply(tape);
     }
 }

@@ -8,8 +8,8 @@ class TuringTest {
 
     @Test
     void run() {
-        final Tape theTape = new Tape();
-        final Turing turing = new Turing(theTape);
+        final var theTape = new Tape();
+        final var turing = new Turing(theTape);
 
         turing.addState(new State("A", tape -> {
             tape.write(1);
@@ -34,7 +34,5 @@ class TuringTest {
         turing.run(6);
 
         assertEquals(3, theTape.bitsSet());
-
-        System.out.println(turing);
     }
 }

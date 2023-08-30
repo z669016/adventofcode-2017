@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-public class Tape {
+class Tape {
     private final List<BitSet> bits = new ArrayList<>();
     private int offset = 0;
     private int cursor = 0;
@@ -35,21 +35,21 @@ public class Tape {
     }
 
     public int read() {
-        final int index = (offset + cursor) / 64;
-        final BitSet bitset = bits.get(index);
+        final var index = (offset + cursor) / 64;
+        final var bitset = bits.get(index);
 
         return bitset.get(Math.abs(cursor) % 64) ? 1 : 0;
     }
 
     public void write(int value) {
-        final int index = (offset + cursor) / 64;
-        final BitSet bitset = bits.get(index);
+        final var index = (offset + cursor) / 64;
+        final var bitset = bits.get(index);
 
         bitset.set(Math.abs(cursor) % 64, value != 0);
     }
 
     public int bitsSet() {
-        int count = 0;
+        var count = 0;
 
         for (BitSet set : bits)
             for (int i = set.nextSetBit(0); i >= 0; i = set.nextSetBit(i+1))

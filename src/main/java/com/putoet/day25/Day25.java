@@ -1,20 +1,24 @@
 package com.putoet.day25;
 
+import com.putoet.utils.Timer;
+
 public class Day25 {
     public static void main(String[] args) {
-        final Tape tape = new Tape();
-        final Turing turing = new Turing(tape);
+        Timer.run(() -> {
+            final var tape = new Tape();
+            final var turing = new Turing(tape);
 
-        turing.addState(a(), true);
-        turing.addState(b());
-        turing.addState(c());
-        turing.addState(d());
-        turing.addState(e());
-        turing.addState(f());
+            turing.addState(a(), true);
+            turing.addState(b());
+            turing.addState(c());
+            turing.addState(d());
+            turing.addState(e());
+            turing.addState(f());
 
-        turing.run(12964419);
+            turing.run(12964419);
 
-        System.out.println("Diagnostic checksum is " + tape.bitsSet());
+            System.out.println("Diagnostic checksum is " + tape.bitsSet());
+        });
     }
 
     private static State a() {

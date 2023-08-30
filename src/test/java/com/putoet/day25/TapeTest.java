@@ -8,17 +8,17 @@ class TapeTest {
 
     @Test
     void blocks() {
-        final Tape tape = new Tape();
+        final var tape = new Tape();
 
         assertEquals(1, tape.blocks());
         tape.left();
         assertEquals(2, tape.blocks());
 
-        for (int idx = 0; idx < 64; idx++)
+        for (var idx = 0; idx < 64; idx++)
             tape.left();
         assertEquals(3, tape.blocks());
 
-        for (int idx = 0; idx < (3 * 64 + 1); idx++)
+        for (var idx = 0; idx < (3 * 64 + 1); idx++)
             tape.right();
 
         assertEquals(5, tape.blocks());
@@ -26,12 +26,12 @@ class TapeTest {
 
     @Test
     void readWrite() {
-        final Tape tape = new Tape();
-        for (int idx = 0; idx < 3 * 64; idx++) {
+        final var tape = new Tape();
+        for (var idx = 0; idx < 3 * 64; idx++) {
             tape.write( idx % 2);
             tape.right();
         }
-        for (int idx = 5 * 64; idx > 0; idx--) {
+        for (var idx = 5 * 64; idx > 0; idx--) {
             tape.write( idx % 2);
             tape.left();
         }

@@ -1,22 +1,24 @@
 package com.putoet.day25;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Turing {
+class Turing {
     private final Tape tape;
     private final Map<String, State> states = new HashMap<>();
     private State current;
 
-    public Turing(Tape tape) {
+    public Turing(@NotNull Tape tape) {
         this.tape = tape;
     }
 
-    public void addState(State state) {
+    public void addState(@NotNull State state) {
         addState(state, false);
     }
 
-    public void addState(State state, boolean start) {
+    public void addState(@NotNull State state, boolean start) {
         states.put(state.name(), state);
 
         if (start)
@@ -24,8 +26,8 @@ public class Turing {
     }
 
     public void run(int count) {
-        for (int i = 0; i < count; i++) {
-            final String next = current.apply(tape);
+        for (var i = 0; i < count; i++) {
+            final var next = current.apply(tape);
             current = states.get(next);
         }
     }
