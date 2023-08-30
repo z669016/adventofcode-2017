@@ -18,7 +18,7 @@ public class Day23 {
     }
 
     public static int part2() {
-        int b, c, d, e, f, g, h = 0;
+        int b, c, d, f, g, h = 0;
 
         // initial values
         b = 106_700;
