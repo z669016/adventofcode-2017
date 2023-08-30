@@ -1,12 +1,13 @@
 package com.putoet.day19;
 
 import com.putoet.grid.Point;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.IntStream;
 
-public class SeriesOfTubes {
+class SeriesOfTubes {
     enum Direction {
         DOWN,
         LEFT,
@@ -39,26 +40,21 @@ public class SeriesOfTubes {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer();
+        final var sb = new StringBuffer();
         IntStream.range(0, grid.length).forEach(y -> sb.append(grid[y]).append("\n"));
         return sb.toString();
     }
 
-    public static SeriesOfTubes of(List<String> lines) {
-        assert lines != null;
-
-        final char[][] grid = grid(lines);
-        final List<Tube> tubes = tubes(grid);
+    public static SeriesOfTubes of(@NotNull List<String> lines) {
+        final var grid = grid(lines);
+        final var tubes = tubes(grid);
 
         return new SeriesOfTubes(grid, tubes);
     }
 
     private static char[][] grid(List<String> lines) {
-        final OptionalInt maxLen = lines.stream().mapToInt(String::length).max();
-        if (maxLen.isEmpty())
-            throw new IllegalArgumentException("Invalid grid drawing!");
-
-        final char[][] grid = new char[lines.size()][maxLen.getAsInt()];
+        final var maxLen = lines.stream().mapToInt(String::length).max().orElseThrow();
+        final var grid = new char[lines.size()][maxLen];
         IntStream.range(0, lines.size())
                 .forEach(y -> {
                     Arrays.fill(grid[y], ' ');
@@ -70,13 +66,14 @@ public class SeriesOfTubes {
     private static List<Tube> tubes(char[][] grid) {
         final List<Tube> list = new ArrayList<>();
         final Point start = start(grid);
-        Tube tube = createTube(grid, start);
 
+        var tube = createTube(grid, start);
         while (!Character.isLetter(grid[tube.end().y()][tube.end().x()])) {
             list.add(tube);
             tube = createTube(grid, tube);
         }
         list.add(tube);
+
         return list;
     }
 
@@ -89,10 +86,10 @@ public class SeriesOfTubes {
     }
 
     private static Tube createTube(char[][] grid, Point start, Direction direction) {
-        int y = start.y();
-        int x = start.x();
+        var y = start.y();
+        var x = start.x();
 
-        List<Character> letters = new ArrayList<>();
+        final var letters = new ArrayList<Character>();
         switch (direction) {
             case DOWN -> {
                 do {
@@ -151,7 +148,8 @@ public class SeriesOfTubes {
     }
 
     private static Direction direction(char[][] grid, Point point) {
-        final int y = point.y(), x = point.x();
+        final var y = point.y();
+        final var x = point.x();
 
         if (y < grid.length - 1 && verticalSymbol(grid[y + 1][x])) return Direction.DOWN;
         if (y > 0 && verticalSymbol(grid[y - 1][x])) return Direction.UP;
@@ -170,7 +168,8 @@ public class SeriesOfTubes {
     }
 
     private static Direction direction(char[][] grid, Tube tube) {
-        final int y = tube.end().y(), x = tube.end().x();
+        final var y = tube.end().y();
+        final var x = tube.end().x();
 
         if (tube.start().y() != tube.end().y()) {
             if (x < grid[y].length - 1 && horizontalSymbol(grid[y][x + 1])) return Direction.RIGHT;
@@ -183,7 +182,7 @@ public class SeriesOfTubes {
     }
 
     private static Point start(char[][] grid) {
-        for (int x = 0; x < grid[0].length; x++)
+        for (var x = 0; x < grid[0].length; x++)
             if (grid[0][x] == VERTICAL_LINE) return Point.of(x, 0);
 
         throw new IllegalArgumentException("No stating point found on grid line 0 ('" + String.valueOf(grid[0]) + "')");

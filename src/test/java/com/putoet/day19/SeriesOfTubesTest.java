@@ -9,7 +9,7 @@ class SeriesOfTubesTest {
 
     @Test
     void of() {
-        final SeriesOfTubes seriesOfTubes = SeriesOfTubes.of(ResourceLines.list("/day19.txt"));
+        final var seriesOfTubes = SeriesOfTubes.of(ResourceLines.list("/day19.txt"));
         assertEquals("ABCDEF", seriesOfTubes.letters());
         assertEquals(38L, seriesOfTubes.steps());
     }
